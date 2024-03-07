@@ -1,15 +1,15 @@
 package com.Certant.servicio.del.automotor.dto;
 
+import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.ClientType;
-import com.Certant.servicio.del.automotor.models.Cliente;
 
-public class ClienteDTO {
+public class ClientDTO {
 
     private String nombre;
     private ClientType tipoCliente;
     private int serviciosPrevios;
 
-    public ClienteDTO(Cliente cliente){
+    public ClientDTO(Client cliente){
         this.nombre = cliente.getNombre();
         this.tipoCliente = cliente.getTipoCliente();
         this.serviciosPrevios = cliente.getServicios();

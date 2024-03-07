@@ -1,16 +1,24 @@
 package com.Certant.servicio.del.automotor.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Servicio {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private ABTYPE alineacionybalanceo;
     private CAFTYPE aceiteyfiltro;
     private LavadoType lavado;
 
 
-    //constructor
+    //constructors
+    public Servicio(){}
     public Servicio(ABTYPE ab,CAFTYPE caf,LavadoType lav){
         this.alineacionybalanceo = ab;
         this.aceiteyfiltro = caf;

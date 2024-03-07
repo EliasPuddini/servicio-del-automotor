@@ -1,13 +1,13 @@
 package com.Certant.servicio.del.automotor.dto;
 
-import com.Certant.servicio.del.automotor.models.Cliente;
+import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Servicio;
 import com.Certant.servicio.del.automotor.models.Turno;
 
 import java.time.LocalDateTime;
 
 public class TurnoDTO {
-    private Cliente cliente;
+    private Client cliente;
     private Servicio servicio;
     private LocalDateTime fecha;
     private String Patente;
@@ -18,7 +18,7 @@ public class TurnoDTO {
         this.fecha = turno.getFecha();
     }
 
-    public Cliente getCliente() {
+    public Client getCliente() {
         return cliente;
     }
 

@@ -1,30 +1,38 @@
 package com.Certant.servicio.del.automotor.models;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 
 @Entity
 public class Turno {
 
-    private Cliente cliente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
+    @OneToOne
+    private Client cliente;
+    @OneToOne
     private Servicio servicio;
     private LocalDateTime fecha;
-    private String Patente;
+    private String patente;
 
     //constructor
-    public Turno(Cliente nCliente,Servicio nServicio,LocalDateTime nfecha){
+    public Turno(){}
+    public Turno(Client nCliente,Servicio nServicio,LocalDateTime nfecha, String npatente){
         this.cliente = nCliente;
         this.servicio = nServicio;
         this.fecha = nfecha;
+        this.patente = npatente;
     }
 
     //geters y seters
-    public Cliente getCliente() {
+    public Client getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Client cliente) {
         this.cliente = cliente;
     }
 
@@ -45,10 +53,10 @@ public class Turno {
     }
 
     public String getPatente() {
-        return Patente;
+        return patente;
     }
 
     public void setPatente(String patente) {
-        Patente = patente;
+        patente = patente;
     }
 }
