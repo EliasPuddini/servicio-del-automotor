@@ -21,10 +21,11 @@ public class Servicio {
 
     //constructors
     public Servicio(){}
-    public Servicio(String ab,String caf,String lav){
+    public Servicio(String ab,String caf,String lav, double precio){
         this.alineacionybalanceo = ab;
         this.aceiteyfiltro = caf;
         this.lavado = lav;
+        this.precio = precio;
     }
 
     //geters and seters
