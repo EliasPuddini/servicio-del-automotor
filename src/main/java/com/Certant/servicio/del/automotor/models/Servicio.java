@@ -10,43 +10,62 @@ import org.hibernate.annotations.GenericGenerator;
 public class Servicio {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     private Long id;
-    private ABTYPE alineacionybalanceo;
-    private CAFTYPE aceiteyfiltro;
-    private LavadoType lavado;
+    private double precio;//ingresado por el cliente
+    private String alineacionybalanceo;//con o sin cambio de cubiertas
+    private String aceiteyfiltro;//básico o de alto rendimiento, para motores diesel o nafteros
+    private String lavado;//básico, completo o premium
 
 
     //constructors
     public Servicio(){}
-    public Servicio(ABTYPE ab,CAFTYPE caf,LavadoType lav){
+    public Servicio(String ab,String caf,String lav){
         this.alineacionybalanceo = ab;
         this.aceiteyfiltro = caf;
         this.lavado = lav;
     }
 
     //geters and seters
-    public ABTYPE getAlineacionybalanceo() {
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public String getAlineacionybalanceo() {
         return alineacionybalanceo;
     }
 
-    public void setAlineacionybalanceo(ABTYPE alineacionybalanceo) {
+    public void setAlineacionybalanceo(String alineacionybalanceo) {
         this.alineacionybalanceo = alineacionybalanceo;
     }
 
-    public CAFTYPE getAceiteyfiltro() {
+    public String getAceiteyfiltro() {
         return aceiteyfiltro;
     }
 
-    public void setAceiteyfiltro(CAFTYPE aceiteyfiltro) {
+    public void setAceiteyfiltro(String aceiteyfiltro) {
         this.aceiteyfiltro = aceiteyfiltro;
     }
 
-    public LavadoType getLavado() {
+    public String getLavado() {
         return lavado;
     }
 
-    public void setLavado(LavadoType lavado) {
+    public void setLavado(String lavado) {
         this.lavado = lavado;
     }
 }

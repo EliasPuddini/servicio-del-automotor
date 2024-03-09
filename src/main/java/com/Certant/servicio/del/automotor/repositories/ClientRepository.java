@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@RepositoryRestResource
 public interface ClientRepository extends JpaRepository<Client,Long> {
 
-
-    List<com.Certant.servicio.del.automotor.models.Client> findAll();
 }

@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 @Entity
 public class Turno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     public long id;
     @OneToOne
     private Client cliente;
@@ -24,7 +26,10 @@ public class Turno {
         this.cliente = nCliente;
         this.servicio = nServicio;
         this.fecha = nfecha;
-        this.patente = npatente;
+        if(validarPatente(npatente)){
+            this.patente = npatente;
+        }else this.patente = null;
+
     }
 
     //geters y seters
@@ -58,5 +63,10 @@ public class Turno {
 
     public void setPatente(String patente) {
         patente = patente;
+    }
+
+    private boolean validarPatente(String patente) {
+        String pattern = "^[A-Z]{3}\\d{3}$|^[A-Z]{2}\\d{3}[A-Z]{2}$";
+        return Pattern.matches(pattern, patente);
     }
 }

@@ -11,6 +11,6 @@ public interface TurnosService {
     Turno getTurnoDTO(Long id);
     void saveTurno(Turno turno);
 
-
+    void deleteTurno(Long id);
 
 }

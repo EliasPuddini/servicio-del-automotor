@@ -16,14 +16,20 @@ public class TurnosServiceImplementations implements TurnosService {
     @Autowired
     TurnoRepository turnoRepository;
 
+    @Override
     public List<TurnoDTO> getTurnosDTO(){
         return turnoRepository.findAll().stream().map(turno ->new TurnoDTO(turno)).collect(Collectors.toList());
     }
-
+    @Override
     public Turno getTurnoDTO(Long id){
         return turnoRepository.findById(id).orElse(null);
     }
+    @Override
     public void saveTurno(Turno turno){
         turnoRepository.save(turno);
+    }
+    @Override
+    public void deleteTurno(Long id){
+        turnoRepository.deleteById(id);
     }
 }

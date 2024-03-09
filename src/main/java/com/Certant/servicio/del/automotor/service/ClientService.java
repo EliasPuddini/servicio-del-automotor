@@ -11,6 +11,7 @@ public interface ClientService {
     List<ClientDTO> getClientsDTO();
 
     Optional<Client> getClient(Long id);
+
     void deleteClient(Long id);
     void saveClient(Client client);
     void updateServicecounter(Long id);

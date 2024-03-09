@@ -8,25 +8,42 @@ import org.hibernate.annotations.GenericGenerator;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
+    @GenericGenerator(name = "native",strategy = "native")
     private Long id;
+    @Column(name = "DNI",unique = true)
+    private double dni;
     private String nombre;
-    private ClientType tipoCliente;
+    private String tipoCliente;
     private int serviciosPrevios;
 
 
     //constructors
     public Client(){}
-    public Client(String nNombre, ClientType tipo, int serviciosPrevios){
+    public Client(String nNombre, int serviciosPrevios, double dni){
         this.nombre = nNombre;
-        this.tipoCliente = tipo;
+        this.dni = dni;
         this.serviciosPrevios = serviciosPrevios;
+
+        if(serviciosPrevios>5){
+            this.tipoCliente = "Premium";
+        }else{
+            this.tipoCliente = "Normal";
+        }
     }
 
     //Geters and Seters
 
     public Long getId() {
         return id;
+    }
+
+    public double getDni() {
+        return dni;
+    }
+
+    public void setDni(double dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {
@@ -37,13 +54,10 @@ public class Client {
         this.nombre = nombre;
     }
 
-    public ClientType getTipoCliente() {
+    public String getTipoCliente() {
         return tipoCliente;
     }
 
-    public void setTipoCliente(ClientType tipoCliente) {
-        this.tipoCliente = tipoCliente;
-    }
 
     public int getServicios() {
         return serviciosPrevios;
