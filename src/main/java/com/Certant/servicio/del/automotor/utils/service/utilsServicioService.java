@@ -34,7 +34,7 @@ public class utilsServicioService {
         opcionString2 = lectura.next();
 
         if (opcionString2.equals("si")) {
-            gestionarCAF(opcionString2, lectura);
+            opcionString2 = gestionarCAF(opcionString2, lectura);
         } else {
             opcionString2 = opcionString2 = "no";
         }
@@ -43,7 +43,7 @@ public class utilsServicioService {
         System.out.println("Se lavara el vehiculo?");
         opcionString3 = lectura.next();
 
-        if (opcionString2.equals("si")) {
+        if (opcionString3.equals("si")) {
             opcionString3 = gestionarLavado(opcionString3, lectura);
         } else {
             opcionString3 = "no";

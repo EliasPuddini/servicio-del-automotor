@@ -1,6 +1,5 @@
 package com.Certant.servicio.del.automotor.utils.service;
 
-import com.Certant.servicio.del.automotor.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.dto.TurnoDTO;
 import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Servicio;
@@ -22,6 +21,7 @@ public class utilsTurnosService {
     public static void ingresarTurnos(ClientRepository clientRepository, TurnoRepository turnoRepository, ServicioRepository servicioRepository){
 
         int flag = 0, dia,mes,año,hora,minuto;
+        Long id;
         double opcionDouble;
         String patente;
         Scanner lectura = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class utilsTurnosService {
         Turno turno;
         LocalDate fecha;
         LocalTime horaDelDia;
-        LocalDateTime fechaYHora;
+        LocalDateTime fechaYHora, fechaActual = LocalDateTime.now();
 
         System.out.println("Primero se ingresara el cliente del turno.");
         System.out.println("Ingresar el dni del cliente.");
@@ -40,7 +40,7 @@ public class utilsTurnosService {
 
             cliente = clientRepository.findAll().stream().filter(client -> client.getDni() == opcionDouble).findFirst().orElse(null);
         }else{
-            utilsClientService.ingresarClientes(clientRepository);
+            utilsClientService.ingresarClientes(clientRepository,1);
             cliente = clientRepository.findAll().stream().filter(client -> client.getDni() == opcionDouble).findFirst().orElse(null);
         }
 
@@ -50,7 +50,7 @@ public class utilsTurnosService {
         System.out.println("Ahora se ingresaran los datos del turno.");
         do{
             System.out.println("ingresar la patente.");
-            patente = lectura.next();
+            patente = lectura.next().toUpperCase();
 
             if(!validarPatente(patente)){
                 System.out.println("Formato de patente erroneo.");
@@ -78,6 +78,11 @@ public class utilsTurnosService {
         turnoRepository.save(turno);
         System.out.println("Turno guardado correctamente.");
 
+        if(fechaYHora.isBefore(fechaActual)){
+            utilsClientService.incrementarServiciosPrecios(cliente,clientRepository);
+        }
+
+
     }
 
     public static void buscarTurnosPorCliente(double dni, TurnoRepository turnoRepository){
@@ -92,9 +97,41 @@ public class utilsTurnosService {
         System.out.println(turnoRepository.findById(id).orElse(null));
     }
 
+    public static void buscarTurnosAntiguos(TurnoRepository turnoRepository, LocalDateTime fecha){
+
+        List<Turno> turnos = turnoRepository.findAll().stream().filter(turno -> turno.getFecha().isBefore(fecha)).collect(Collectors.toList());
+        for (Turno turno : turnos) {
+            System.out.println(turno);
+        }
+    }
+
+    public static void buscarTurnosFuturos(TurnoRepository turnoRepository, LocalDateTime fecha){
+
+        List<Turno> turnos = turnoRepository.findAll().stream().filter(turno -> turno.getFecha().isAfter(fecha)).collect(Collectors.toList());
+        for (Turno turno : turnos) {
+            System.out.println(turno);
+        }
+    }
+
     public static boolean validarPatente(String patente) {
         String pattern = "^[A-Z]{3}\\d{3}$|^[A-Z]{2}\\d{3}[A-Z]{2}$";
         return Pattern.matches(pattern, patente);
+    }
+
+    public static void ActualizarServiciosPrevios(ClientRepository clientRepository, TurnoRepository turnoRepository, LocalDateTime fechaActual){ //actualizar la base de datos en base a la fecha de ejecución.
+
+
+        List <Client> clients = clientRepository.findAll().stream().collect(Collectors.toList());
+        List <Turno> turnosExecute,turnos = turnoRepository.findAll().stream().collect(Collectors.toList());
+
+        for (Turno turno : turnos) {
+
+            Client client = turno.getCliente();
+            Long turnosPrevios = turnoRepository.findAll().stream().filter(turno1 -> turno1.getCliente().getDni() == client.getDni() && turno1.getFecha().isBefore(fechaActual)).count();
+
+            if(client.getServicios() != turnosPrevios) client.setServicios(turnosPrevios.intValue());
+            clientRepository.save(client);
+        }
     }
 
 }

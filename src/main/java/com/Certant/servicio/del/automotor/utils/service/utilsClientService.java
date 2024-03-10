@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class utilsClientService {
 
-    public static void ingresarClientes(ClientRepository clientRepository){
+    public static void ingresarClientes(ClientRepository clientRepository,int contexto){
 
         int flag = 0;
         double opcionDouble;
@@ -29,8 +29,14 @@ public class utilsClientService {
                 }else{
                     Client client = new Client(opcionString,0,opcionDouble);
                     clientRepository.save(client);
-                    System.out.println("Cliente ingresado. Quiere ingresar un cliente nuevo?");
-                    opcionString = lectura.next();
+
+                    if(contexto == 0){
+                        System.out.println("Cliente ingresado. Quiere ingresar un cliente nuevo?");
+                        opcionString = lectura.next();
+                    }else{
+                        System.out.println("Cliente ingresado.");
+                        flag++;
+                    }
                 }
 
                 if (opcionString.equals("no")){
@@ -41,6 +47,10 @@ public class utilsClientService {
     }
 
 
+
+    public static void buscarClientes(ClientRepository clientRepository){
+        System.out.println(clientRepository.findAll().stream().collect(Collectors.toList()));
+    }
 
     public static void buscarCliente(ClientRepository clientRepository){
 
@@ -60,4 +70,10 @@ public class utilsClientService {
     public static boolean clienteExistente(ClientRepository clientRepository,double dni){
         return clientRepository.findAll().stream().filter(client -> client.getDni()==dni).count() != 0;
     };
+
+    public static void incrementarServiciosPrecios(Client client,ClientRepository clientRepository){
+
+        client.updateServicecounter();
+        clientRepository.save(client);
+    }
 }

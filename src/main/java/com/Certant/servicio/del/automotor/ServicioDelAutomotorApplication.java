@@ -21,7 +21,6 @@ public class ServicioDelAutomotorApplication {
 		return args -> {
 			com.Certant.servicio.del.automotor.utils.utils.menu(clientRepository,turnoRepository,servicioRepository);	//arrancar el menu
 		};
-
 	}
 
 }

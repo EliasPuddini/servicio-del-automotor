@@ -69,4 +69,15 @@ public class Turno {
         String pattern = "^[A-Z]{3}\\d{3}$|^[A-Z]{2}\\d{3}[A-Z]{2}$";
         return Pattern.matches(pattern, patente);
     }
+
+    @Override
+    public String toString() {
+        return "Turno{" +
+                "id=" + id +
+                ", cliente=" + cliente +
+                ", servicio=" + servicio +
+                ", fecha=" + fecha +
+                ", patente='" + patente + '\'' +
+                '}';
+    }
 }

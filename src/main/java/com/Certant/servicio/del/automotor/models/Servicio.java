@@ -69,4 +69,15 @@ public class Servicio {
     public void setLavado(String lavado) {
         this.lavado = lavado;
     }
+
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                "id=" + id +
+                ", precio=" + precio +
+                ", alineacionybalanceo='" + alineacionybalanceo + '\'' +
+                ", aceiteyfiltro='" + aceiteyfiltro + '\'' +
+                ", lavado='" + lavado + '\'' +
+                '}';
+    }
 }

@@ -65,10 +65,12 @@ public class Client {
 
     public void setServicios(int servicios) {
         this.serviciosPrevios = servicios;
+        if(this.serviciosPrevios > 5) this.tipoCliente = "Premium";
     }
 
     public void updateServicecounter(){
         this.serviciosPrevios ++;
+        if(this.serviciosPrevios > 5) this.tipoCliente = "Premium";
     }
 
     @Override
