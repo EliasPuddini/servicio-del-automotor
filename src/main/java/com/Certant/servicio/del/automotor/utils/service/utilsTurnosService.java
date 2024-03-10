@@ -85,11 +85,12 @@ public class utilsTurnosService {
 
     }
 
-    public static void buscarTurnosPorCliente(double dni, TurnoRepository turnoRepository){
+    public static List<Turno> buscarTurnosPorCliente(double dni, TurnoRepository turnoRepository){
 
-        List<TurnoDTO> turnos = turnoRepository.findAll().stream().filter(turno -> turno.getCliente().getDni() == dni).map(turno -> new TurnoDTO(turno)).collect(Collectors.toList());;
+        List<Turno> turnos = turnoRepository.findAll().stream().filter(turno -> turno.getCliente().getDni() == dni).collect(Collectors.toList());;
 
         System.out.println(turnos);
+        return turnos;
     }
 
     public static void buscarTurnosPorID(Long id, TurnoRepository turnoRepository){

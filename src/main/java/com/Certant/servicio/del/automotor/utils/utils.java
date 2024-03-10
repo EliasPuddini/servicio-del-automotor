@@ -21,7 +21,7 @@ public class utils {
 
         int flag = 0, flagClients = 0,flagTurnos = 0, opcionMenu;
         Long opcionLong;
-        double opcionDouble;
+        double opcionDouble,dni;
         Scanner lectura1 = new Scanner(System.in);
         LocalDateTime fechaActual = LocalDateTime.now();
 
@@ -54,7 +54,10 @@ public class utils {
                                 break;
                             case 2:
 
-                                utilsClientService.buscarCliente(clientRepository);
+                                System.out.println("Introduzca el dni del cliente.");
+                                dni = lectura1.nextDouble();
+
+                                utilsClientService.buscarCliente(clientRepository,dni);
                                 break;
                             case 3:
 

@@ -16,7 +16,7 @@ public class ServicioDelAutomotorApplication {
 		SpringApplication.run(ServicioDelAutomotorApplication.class, args);
 	}
 
-	@Bean
+	@Bean //comentar el @Bean si quieren ejecutar los test
 	public CommandLineRunner init(ServicioRepository servicioRepository, ClientRepository clientRepository, TurnoRepository turnoRepository){
 		return args -> {
 			com.Certant.servicio.del.automotor.utils.utils.menu(clientRepository,turnoRepository,servicioRepository);	//arrancar el menu

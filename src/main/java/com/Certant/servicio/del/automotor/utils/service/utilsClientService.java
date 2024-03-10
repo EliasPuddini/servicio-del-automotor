@@ -52,18 +52,14 @@ public class utilsClientService {
         System.out.println(clientRepository.findAll().stream().collect(Collectors.toList()));
     }
 
-    public static void buscarCliente(ClientRepository clientRepository){
+    public static Client buscarCliente(ClientRepository clientRepository,double dni){
 
-        double dni;
-        ClientDTO cliente;
-        Scanner lectura = new Scanner(System.in);
+        Client cliente;
 
-        System.out.println("Introduzca el dni del cliente.");
-        dni = lectura.nextDouble();
-
-        cliente = clientRepository.findAll().stream().filter(client -> client.getDni()==dni).map(client -> new ClientDTO(client)).findFirst().orElse(null);
+        cliente = clientRepository.findAll().stream().filter(client -> client.getDni()==dni).findFirst().orElse(null);
 
         System.out.println(cliente);
+        return cliente;
     }
 
 
