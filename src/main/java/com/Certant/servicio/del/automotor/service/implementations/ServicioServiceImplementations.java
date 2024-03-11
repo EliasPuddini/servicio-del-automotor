@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -24,8 +25,8 @@ public class ServicioServiceImplementations implements ServicioService {
         return servicioRepository.findAll().stream().map(servicio -> new ServicioDTO(servicio)).collect(toList());
     }
     @Override
-    public Servicio getServicio(Long id){
-        return servicioRepository.findById(id).orElse(null);
+    public Optional<Servicio> getServicio(Long id){
+        return servicioRepository.findById(id);
     }
     @Override
     public void deleteServicio(Long id){

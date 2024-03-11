@@ -4,11 +4,12 @@ import com.Certant.servicio.del.automotor.dto.TurnoDTO;
 import com.Certant.servicio.del.automotor.models.Turno;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TurnosService {
     List<TurnoDTO> getTurnosDTO();
 
-    Turno getTurnoDTO(Long id);
+    Optional<Turno> getTurnoDTO(Long id);
     void saveTurno(Turno turno);
 
     void deleteTurno(Long id);

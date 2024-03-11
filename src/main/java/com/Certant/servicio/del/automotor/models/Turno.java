@@ -33,6 +33,11 @@ public class Turno {
     }
 
     //geters y seters
+
+    public long getId() {
+        return id;
+    }
+
     public Client getCliente() {
         return cliente;
     }

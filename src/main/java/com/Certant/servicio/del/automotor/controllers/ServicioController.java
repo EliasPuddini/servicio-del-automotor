@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/api/servicios")
@@ -21,12 +22,12 @@ public class ServicioController {
     }
 
     @GetMapping("/{servicioId}")
-    public Servicio getById(@PathVariable("servicioId") Long servicioId){
+    public Optional<Servicio> getById(@PathVariable("servicioId") Long servicioId){
         return servicioService.getServicio(servicioId);
     }
 
     @PostMapping
-    public void saveServicio(@RequestBody Servicio servicio){
+    public void saveServicioPorId(@RequestBody Servicio servicio){
         servicioService.saveServicio(servicio);
     }
 
@@ -35,9 +36,4 @@ public class ServicioController {
         servicioService.deleteServicio(servicioId);
     }
 
-    /*List<ServicioDTO> getServiciosDTO();
-
-    Servicio getServicio(Long id);
-    void deleteServicio(Long id);
-    void saveServicio(Servicio servicio);*/
 }
