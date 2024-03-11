@@ -2,6 +2,7 @@ package com.Certant.servicio.del.automotor.utils.service;
 
 import com.Certant.servicio.del.automotor.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.models.Client;
+import com.Certant.servicio.del.automotor.models.Turno;
 import com.Certant.servicio.del.automotor.repositories.ClientRepository;
 
 import java.util.List;
@@ -49,7 +50,11 @@ public class utilsClientService {
 
 
     public static void buscarClientes(ClientRepository clientRepository){
-        System.out.println(clientRepository.findAll().stream().collect(Collectors.toList()));
+        List<Client> clientes = clientRepository.findAll().stream().collect(Collectors.toList());
+
+        for (Client cliente : clientes) {
+            System.out.println(cliente);
+        }
     }
 
     public static Client buscarCliente(ClientRepository clientRepository,double dni){
