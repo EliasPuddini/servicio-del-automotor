@@ -20,8 +20,7 @@ public class utilsTurnosService {
 
     public static void ingresarTurnos(ClientRepository clientRepository, TurnoRepository turnoRepository, ServicioRepository servicioRepository){
 
-        int flag = 0, dia,mes,año,hora,minuto;
-        Long id;
+        int dia,mes,año,hora,minuto;
         double opcionDouble;
         String patente;
         Scanner lectura = new Scanner(System.in);
@@ -121,9 +120,7 @@ public class utilsTurnosService {
 
     public static void ActualizarServiciosPrevios(ClientRepository clientRepository, TurnoRepository turnoRepository, LocalDateTime fechaActual){ //actualizar la base de datos en base a la fecha de ejecución.
 
-
-        List <Client> clients = clientRepository.findAll().stream().collect(Collectors.toList());
-        List <Turno> turnosExecute,turnos = turnoRepository.findAll().stream().collect(Collectors.toList());
+        List <Turno> turnos = turnoRepository.findAll().stream().collect(Collectors.toList());
 
         for (Turno turno : turnos) {
 

@@ -41,7 +41,7 @@ public class ServicioDelAutomotorApplicationTests {
 	@Test
 	public void validarPatentes1(){
 
-		String a = "AA123VV", c = "SD405AD";
+		String a = "AA123VV", c = "SDC056";
 
 		Assertions.assertTrue(utilsTurnosService.validarPatente(a) && utilsTurnosService.validarPatente(c));
 	}
