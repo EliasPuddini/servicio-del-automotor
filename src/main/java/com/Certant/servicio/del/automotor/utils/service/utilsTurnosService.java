@@ -1,6 +1,5 @@
 package com.Certant.servicio.del.automotor.utils.service;
 
-import com.Certant.servicio.del.automotor.dto.TurnoDTO;
 import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Servicio;
 import com.Certant.servicio.del.automotor.models.Turno;
@@ -20,9 +19,8 @@ public class utilsTurnosService {
 
     public static void ingresarTurnos(ClientRepository clientRepository, TurnoRepository turnoRepository, ServicioRepository servicioRepository){
 
-        int flag = 0, dia,mes,año,hora,minuto;
-        Long id;
-        double opcionDouble;
+        int dia,mes,año,hora,minuto;
+        double opcionDouble, opcionDouble2;
         String patente;
         Scanner lectura = new Scanner(System.in);
         Client cliente;
@@ -46,6 +44,9 @@ public class utilsTurnosService {
 
         System.out.println("Segundo se ingresara el servicio del turno.");
         servicio = utilsServicioService.ingresarServicio(servicioRepository);
+
+        System.out.println("ingresar el precio");
+        opcionDouble2 = lectura.nextDouble();
 
         System.out.println("Ahora se ingresaran los datos del turno.");
         do{
@@ -73,7 +74,10 @@ public class utilsTurnosService {
 
         fechaYHora = LocalDateTime.of(fecha, horaDelDia);
 
-        turno = new Turno(cliente,servicio,fechaYHora,patente);
+
+
+
+        turno = new Turno(cliente,servicio,fechaYHora,patente,opcionDouble2);
 
         turnoRepository.save(turno);
         System.out.println("Turno guardado correctamente.");
@@ -121,9 +125,7 @@ public class utilsTurnosService {
 
     public static void ActualizarServiciosPrevios(ClientRepository clientRepository, TurnoRepository turnoRepository, LocalDateTime fechaActual){ //actualizar la base de datos en base a la fecha de ejecución.
 
-
-        List <Client> clients = clientRepository.findAll().stream().collect(Collectors.toList());
-        List <Turno> turnosExecute,turnos = turnoRepository.findAll().stream().collect(Collectors.toList());
+        List <Turno> turnos = turnoRepository.findAll().stream().collect(Collectors.toList());
 
         for (Turno turno : turnos) {
 
@@ -134,5 +136,7 @@ public class utilsTurnosService {
             clientRepository.save(client);
         }
     }
+
+
 
 }

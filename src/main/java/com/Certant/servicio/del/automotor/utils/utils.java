@@ -11,6 +11,7 @@ import com.Certant.servicio.del.automotor.repositories.ClientRepository;
 import com.Certant.servicio.del.automotor.repositories.ServicioRepository;
 import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
 import com.Certant.servicio.del.automotor.utils.service.utilsClientService;
+import com.Certant.servicio.del.automotor.utils.service.utilsServicioService;
 import com.Certant.servicio.del.automotor.utils.service.utilsTurnosService;
 
 import static java.util.stream.Collectors.toList;
@@ -19,7 +20,7 @@ public class utils {
 
     public static void menu(ClientRepository clientRepository, TurnoRepository turnoRepository,ServicioRepository servicioRepository){
 
-        int flag = 0, flagClients = 0,flagTurnos = 0, opcionMenu;
+        int flag = 0, flagClients,flagTurnos,flagServicios, opcionMenu;
         Long opcionLong;
         double opcionDouble,dni;
         Scanner lectura1 = new Scanner(System.in);
@@ -32,8 +33,13 @@ public class utils {
             System.out.println("Bienvenido al menu. Introducir el numero en consola.");
             System.out.println("1.Ver,buscar, e introducir clientes.");
             System.out.println("2.ver,buscar, e introducir turnos.");
-            System.out.println("3.Salir.");
+            System.out.println("3.ver e introducir servicios.");
+            System.out.println("4.Salir.");
             opcionMenu = lectura1.nextInt();
+
+            flagServicios = 0;
+            flagClients = 0;
+            flagTurnos = 0;
 
 
 
@@ -125,6 +131,35 @@ public class utils {
                         }
 
                     }while(flagTurnos == 0);
+
+                    break;
+                case 3:
+                    do{
+                        System.out.println("Servicios.");
+                        System.out.println("1.Ingresar un servicio.");
+                        System.out.println("2.Ver los servicios.");
+                        System.out.println("3.Salir de servicios.");
+                        opcionMenu = lectura1.nextInt();
+
+                        switch(opcionMenu){
+
+                            case 1:
+
+                                utilsServicioService.ingresarServicio(servicioRepository);
+                                break;
+                            case 2:
+
+                                utilsServicioService.getServices(servicioRepository);
+                                break;
+                            default:
+
+                                flagServicios++;
+                                break;
+                        }
+
+
+                    }while (flagServicios == 0);
+
 
                     break;
 

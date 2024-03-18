@@ -13,7 +13,6 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native",strategy = "native")
     private Long id;
-    private double precio;//ingresado por el cliente
     private String alineacionybalanceo;//con o sin cambio de cubiertas
     private String aceiteyfiltro;//básico o de alto rendimiento, para motores diesel o nafteros
     private String lavado;//básico, completo o premium
@@ -21,11 +20,10 @@ public class Servicio {
 
     //constructors
     public Servicio(){}
-    public Servicio(String ab,String caf,String lav, double precio){
+    public Servicio(String ab,String caf,String lav){
         this.alineacionybalanceo = ab;
         this.aceiteyfiltro = caf;
         this.lavado = lav;
-        this.precio = precio;
     }
 
     //geters and seters
@@ -36,14 +34,6 @@ public class Servicio {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public String getAlineacionybalanceo() {
@@ -74,7 +64,6 @@ public class Servicio {
     public String toString() {
         return "Servicio{" +
                 "id=" + id +
-                ", precio=" + precio +
                 ", alineacionybalanceo='" + alineacionybalanceo + '\'' +
                 ", aceiteyfiltro='" + aceiteyfiltro + '\'' +
                 ", lavado='" + lavado + '\'' +

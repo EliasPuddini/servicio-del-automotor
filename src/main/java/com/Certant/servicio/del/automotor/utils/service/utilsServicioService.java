@@ -3,18 +3,21 @@ package com.Certant.servicio.del.automotor.utils.service;
 import com.Certant.servicio.del.automotor.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Servicio;
+import com.Certant.servicio.del.automotor.models.Turno;
 import com.Certant.servicio.del.automotor.repositories.ClientRepository;
 import com.Certant.servicio.del.automotor.repositories.ServicioRepository;
+import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class utilsServicioService {
 
     public static Servicio ingresarServicio(ServicioRepository servicioRepository){
 
-        int flag = 0;
-        double opcionDouble;
         String opcionString1,opcionString2,opcionString3;
         Scanner lectura = new Scanner(System.in);
 
@@ -24,7 +27,7 @@ public class utilsServicioService {
 
         if (opcionString1.equals("si")) {
 
-            opcionString1 = gestionarAYB(opcionString1, lectura);
+            opcionString1 = gestionarAYB();
 
         } else {
             opcionString1 = "no";
@@ -34,7 +37,7 @@ public class utilsServicioService {
         opcionString2 = lectura.next();
 
         if (opcionString2.equals("si")) {
-            opcionString2 = gestionarCAF(opcionString2, lectura);
+            opcionString2 = gestionarCAF();
         } else {
             opcionString2 = opcionString2 = "no";
         }
@@ -44,26 +47,33 @@ public class utilsServicioService {
         opcionString3 = lectura.next();
 
         if (opcionString3.equals("si")) {
-            opcionString3 = gestionarLavado(opcionString3, lectura);
+            opcionString3 = gestionarLavado();
         } else {
             opcionString3 = "no";
         }
 
-        System.out.println("ingresar el precio");
-        opcionDouble = lectura.nextDouble();
 
 
-        Servicio servicio = new Servicio(opcionString1, opcionString2, opcionString3, opcionDouble);
-        servicioRepository.save(servicio);
+
+        Servicio servicio = new Servicio(opcionString1, opcionString2, opcionString3);
+
+        if(existe(servicioRepository,servicio)){
+            System.out.println("Servicio existente seleccionado.");
+            servicio = encontrar(servicioRepository,servicio);
+        }else{
+            servicioRepository.save(servicio);
+            System.out.println("Servicio nuevo ingresado.");
+        }
 
 
-        System.out.println("Servicio ingresado.");
 
         return servicio;
     }
 
-    public static String gestionarAYB(String opcionString1,Scanner lectura){
+    public static String gestionarAYB(){
 
+        Scanner lectura = new Scanner(System.in);
+        String opcionString1;
         System.out.println("La alineación y balance incluye cambio de cubiertas?");
         opcionString1 = lectura.next();;
 
@@ -75,7 +85,10 @@ public class utilsServicioService {
 
         return opcionString1;
     }
-    public static String gestionarCAF(String opcionString2,Scanner lectura){
+    public static String gestionarCAF(){
+
+        Scanner lectura = new Scanner(System.in);
+        String opcionString2;
 
         System.out.println("el motor es diesel?");
         opcionString2 = lectura.next();
@@ -103,8 +116,10 @@ public class utilsServicioService {
         return opcionString2;
     }
 
-    public static String gestionarLavado(String opcionString2,Scanner lectura){
+    public static String gestionarLavado(){
 
+        String opcionString = null;
+        Scanner lectura = new Scanner(System.in);
         int opcionLavado;
 
         System.out.println("que tipo de lavado sera?:");
@@ -114,13 +129,40 @@ public class utilsServicioService {
         opcionLavado = lectura.nextInt();
 
         if(opcionLavado == 1){
-            opcionString2 = "Lavado Basico";
+            opcionString = "Lavado Basico";
         }if(opcionLavado == 2){
-            opcionString2 = "Lavado Completo";
+            opcionString = "Lavado Completo";
         }if(opcionLavado == 3){
-            opcionString2 = "Lavado Premium";
+            opcionString = "Lavado Premium";
         }
 
-        return opcionString2;
+        return opcionString;
+    }
+    public static boolean existe(ServicioRepository servicioRepository, Servicio servicio1){
+
+        return servicioRepository.findAll().stream().anyMatch(servicio ->
+
+                servicio.getAceiteyfiltro() == servicio1.getAceiteyfiltro() &&
+                        servicio.getAlineacionybalanceo() == servicio1.getAlineacionybalanceo() &&
+                        servicio.getLavado() == servicio1.getLavado()
+        );
+    }
+
+    public static Servicio encontrar(ServicioRepository servicioRepository, Servicio servicio1){
+
+        return servicioRepository.findAll().stream().filter(servicio ->
+
+                servicio.getAceiteyfiltro() == servicio1.getAceiteyfiltro() &&
+                        servicio.getAlineacionybalanceo() == servicio1.getAlineacionybalanceo() &&
+                        servicio.getLavado() == servicio1.getLavado()
+        ).findFirst().orElse(null);
+    }
+
+    public static void getServices(ServicioRepository servicioRepository){
+
+        List<Servicio> servicios = servicioRepository.findAll().stream().collect(Collectors.toList());
+        for (Servicio servicio : servicios) {
+            System.out.println(servicio);
+        }
     }
 }

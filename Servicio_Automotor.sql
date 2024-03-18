@@ -28,19 +28,15 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `tipo_cliente` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_m6ysdwsqke00e5piajbvgn6lg` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla servicio_automotor.clientes: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla servicio_automotor.clientes: ~5 rows (aproximadamente)
 INSERT INTO `clientes` (`id`, `dni`, `nombre`, `servicios_previos`, `tipo_cliente`) VALUES
-	(1, 44395233, 'Elias', 0, 'Normal'),
-	(2, 46854751, 'Lautaro', 0, 'Normal'),
-	(3, 40215984, 'Ariel', 0, 'Normal'),
-	(4, 22978154, 'Fernando', 0, 'Normal'),
-	(5, 50497564, 'Martinez', 0, 'Normal'),
-	(7, 25164875, 'Armando', 0, 'Normal'),
-	(8, 22485764, 'Augusto', 1, 'Normal'),
-	(9, 12345687, 'Martin', 1, 'Normal'),
-	(10, 21354876, 'Hernesto', 1, 'Normal');
+	(1, 44395233, 'Elias_Puddini', 1, 'Normal'),
+	(2, 48512465, 'Lautaro_Puddini', 0, 'Normal'),
+	(3, 40254987, 'Franco_Puddini', 0, 'Normal'),
+	(4, 30215485, 'Hernan_Castilla', 0, 'Normal'),
+	(5, 28154965, 'Leon_Puddini', 0, 'Normal');
 
 -- Volcando estructura para tabla servicio_automotor.servicio
 CREATE TABLE IF NOT EXISTS `servicio` (
@@ -48,25 +44,78 @@ CREATE TABLE IF NOT EXISTS `servicio` (
   `aceiteyfiltro` varchar(255) DEFAULT NULL,
   `alineacionybalanceo` varchar(255) DEFAULT NULL,
   `lavado` varchar(255) DEFAULT NULL,
-  `precio` double NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla servicio_automotor.servicio: ~6 rows (aproximadamente)
-INSERT INTO `servicio` (`id`, `aceiteyfiltro`, `alineacionybalanceo`, `lavado`, `precio`) VALUES
-	(1, 'alto rendimiento para motor diesel', 'Con cambio de cubiertas', 'Lavado Completo', 54000),
-	(2, 'bajo rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Basico', 24000),
-	(3, 'no', 'no', 'Lavado Basico', 5000),
-	(4, 'no', 'Con cambio de cubiertas.', 'no', 23500),
-	(5, 'no', 'Con cambio de cubiertas.', 'no', 18540),
-	(6, 'alto rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'no', 72000),
-	(8, 'Con cambio de cubiertas', 'alto rendimiento para motor diesel', 'Lavado Premium', 100000);
+-- Volcando datos para la tabla servicio_automotor.servicio: ~60 rows (aproximadamente)
+INSERT INTO `servicio` (`id`, `aceiteyfiltro`, `alineacionybalanceo`, `lavado`) VALUES
+	(1, 'alto rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Basico'),
+	(2, 'alto rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Completo'),
+	(3, 'alto rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Premium'),
+	(4, 'alto rendimiento para motor diesel', 'Con cambio de cubiertas.', 'no'),
+	(5, 'alto rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Basico'),
+	(6, 'alto rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Completo'),
+	(7, 'alto rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Premium'),
+	(8, 'alto rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'no'),
+	(9, 'alto rendimiento para motor diesel', 'no', 'Lavado Basico'),
+	(10, 'alto rendimiento para motor diesel', 'no', 'Lavado Completo'),
+	(11, 'alto rendimiento para motor diesel', 'no', 'Lavado Premium'),
+	(12, 'alto rendimiento para motor diesel', 'no', 'no'),
+	(13, 'bajo rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Basico'),
+	(14, 'bajo rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Completo'),
+	(15, 'bajo rendimiento para motor diesel', 'Con cambio de cubiertas.', 'Lavado Premium'),
+	(16, 'bajo rendimiento para motor diesel', 'Con cambio de cubiertas.', 'no'),
+	(17, 'bajo rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Basico'),
+	(18, 'bajo rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Completo'),
+	(19, 'bajo rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'Lavado Premium'),
+	(20, 'bajo rendimiento para motor diesel', 'Sin cambio de cubiertas.', 'no'),
+	(21, 'bajo rendimiento para motor diesel', 'no', 'Lavado Basico'),
+	(22, 'bajo rendimiento para motor diesel', 'no', 'Lavado Completo'),
+	(23, 'bajo rendimiento para motor diesel', 'no', 'Lavado Premium'),
+	(24, 'bajo rendimiento para motor diesel', 'no', 'no'),
+	(25, 'alto rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Basico'),
+	(26, 'alto rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Completo'),
+	(27, 'alto rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Premium'),
+	(28, 'alto rendimiento para motor naftero', 'Con cambio de cubiertas.', 'no'),
+	(29, 'alto rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Basico'),
+	(30, 'alto rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Completo'),
+	(31, 'alto rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Premium'),
+	(32, 'alto rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'no'),
+	(33, 'alto rendimiento para motor naftero', 'no', 'Lavado Basico'),
+	(34, 'alto rendimiento para motor naftero', 'no', 'Lavado Completo'),
+	(35, 'alto rendimiento para motor naftero', 'no', 'Lavado Premium'),
+	(36, 'alto rendimiento para motor naftero', 'no', 'no'),
+	(37, 'bajo rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Basico'),
+	(38, 'bajo rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Completo'),
+	(39, 'bajo rendimiento para motor naftero', 'Con cambio de cubiertas.', 'Lavado Premium'),
+	(40, 'bajo rendimiento para motor naftero', 'Con cambio de cubiertas.', 'no'),
+	(41, 'bajo rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Basico'),
+	(42, 'bajo rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Completo'),
+	(43, 'bajo rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'Lavado Premium'),
+	(44, 'bajo rendimiento para motor naftero', 'Sin cambio de cubiertas.', 'no'),
+	(45, 'bajo rendimiento para motor naftero', 'no', 'Lavado Basico'),
+	(46, 'bajo rendimiento para motor naftero', 'no', 'Lavado Completo'),
+	(47, 'bajo rendimiento para motor naftero', 'no', 'Lavado Premium'),
+	(48, 'bajo rendimiento para motor naftero', 'no', 'no'),
+	(49, 'no', 'Con cambio de cubiertas.', 'Lavado Basico'),
+	(50, 'no', 'Con cambio de cubiertas.', 'Lavado Completo'),
+	(51, 'no', 'Con cambio de cubiertas.', 'Lavado Premium'),
+	(52, 'no', 'Con cambio de cubiertas.', 'no'),
+	(53, 'no', 'Sin cambio de cubiertas.', 'Lavado Basico'),
+	(54, 'no', 'Sin cambio de cubiertas.', 'Lavado Completo'),
+	(55, 'no', 'Sin cambio de cubiertas.', 'Lavado Premium'),
+	(56, 'no', 'Sin cambio de cubiertas.', 'no'),
+	(57, 'no', 'no', 'Lavado Basico'),
+	(58, 'no', 'no', 'Lavado Completo'),
+	(59, 'no', 'no', 'Lavado Premium'),
+	(60, 'no', 'no', 'no');
 
 -- Volcando estructura para tabla servicio_automotor.turno
 CREATE TABLE IF NOT EXISTS `turno` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `fecha` datetime(6) DEFAULT NULL,
   `patente` varchar(255) DEFAULT NULL,
+  `precio` double NOT NULL,
   `cliente_id` bigint DEFAULT NULL,
   `servicio_id` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -74,16 +123,11 @@ CREATE TABLE IF NOT EXISTS `turno` (
   UNIQUE KEY `UK_ftaf8949jlemdd3rmo93h32vs` (`servicio_id`),
   CONSTRAINT `FKk0ocq8hmjgn0m8xaxj6oxvopv` FOREIGN KEY (`servicio_id`) REFERENCES `servicio` (`id`),
   CONSTRAINT `FKm6wka9bmorib6a24gp5qd8l53` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla servicio_automotor.turno: ~6 rows (aproximadamente)
-INSERT INTO `turno` (`id`, `fecha`, `patente`, `cliente_id`, `servicio_id`) VALUES
-	(1, '2024-03-15 15:30:00.000000', 'AVC475', 1, 1),
-	(2, '2024-03-21 12:00:00.000000', 'CD154VD', 2, 2),
-	(3, '2024-03-25 16:15:00.000000', 'AX248CD', 7, 3),
-	(4, '2024-03-05 12:20:00.000000', 'ZC957VS', 8, 4),
-	(5, '2024-02-20 14:30:00.000000', 'SA687QW', 9, 5),
-	(6, '2024-02-12 14:23:00.000000', 'XA965ZX', 10, 6);
+-- Volcando datos para la tabla servicio_automotor.turno: ~1 rows (aproximadamente)
+INSERT INTO `turno` (`id`, `fecha`, `patente`, `precio`, `cliente_id`, `servicio_id`) VALUES
+	(1, '2024-03-17 15:30:00.000000', 'ABC457', 250000, 1, 1);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

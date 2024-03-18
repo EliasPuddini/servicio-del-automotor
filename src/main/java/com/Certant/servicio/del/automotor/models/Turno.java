@@ -13,6 +13,7 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native",strategy = "native")
     public long id;
+    private double precio;//ingresado por el cliente
     @OneToOne
     private Client cliente;
     @OneToOne
@@ -22,20 +23,28 @@ public class Turno {
 
     //constructor
     public Turno(){}
-    public Turno(Client nCliente,Servicio nServicio,LocalDateTime nfecha, String npatente){
+    public Turno(Client nCliente,Servicio nServicio,LocalDateTime nfecha, String npatente,double precio){
         this.cliente = nCliente;
         this.servicio = nServicio;
         this.fecha = nfecha;
         if(validarPatente(npatente)){
             this.patente = npatente;
         }else this.patente = null;
-
+        this.precio = precio;
     }
 
     //geters y seters
 
     public long getId() {
         return id;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public Client getCliente() {

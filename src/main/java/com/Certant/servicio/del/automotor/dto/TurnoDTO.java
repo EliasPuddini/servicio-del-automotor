@@ -10,12 +10,13 @@ public class TurnoDTO {
     private Client cliente;
     private Servicio servicio;
     private LocalDateTime fecha;
-    private String Patente;
+    private String patente;
 
     public TurnoDTO(Turno turno){
         this.cliente = turno.getCliente();
         this.servicio = turno.getServicio();
         this.fecha = turno.getFecha();
+        this.patente = turno.getPatente();
     }
 
     public Client getCliente() {
@@ -31,6 +32,6 @@ public class TurnoDTO {
     }
 
     public String getPatente() {
-        return Patente;
+        return patente;
     }
 }

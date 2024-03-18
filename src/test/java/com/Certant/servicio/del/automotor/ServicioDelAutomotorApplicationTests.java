@@ -95,7 +95,7 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 	@Test
 	public void crearBuscarEliminarServicio(){
 
-		Servicio servicio = new Servicio("alto rendimiento para motor diesel","Con cambio de cubiertas","Lavado Premium",100000);
+		Servicio servicio = new Servicio("alto rendimiento para motor diesel","Con cambio de cubiertas","Lavado Premium");
 		boolean operacion1, operacion2;
 
 		servicioServiceImplementations.saveServicio(servicio);
@@ -110,8 +110,8 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 	public void crearBuscarEliminarTurno(){
 
 		Client cliente = new Client("Jose Luis",0,3154698);
-		Servicio servicio = new Servicio("alto rendimiento para motor diesel","Con cambio de cubiertas","Lavado Premium",100000);
-		Turno turno = new Turno(cliente,servicio, LocalDateTime.of(2024,05,15,9,30),"CS963SQ");
+		Servicio servicio = new Servicio("alto rendimiento para motor diesel","Con cambio de cubiertas","Lavado Premium");
+		Turno turno = new Turno(cliente,servicio, LocalDateTime.of(2024,05,15,9,30),"CS963SQ",110000);
 		boolean operacion1, operacion2;
 
 		turnosServiceImplementations.saveTurno(turno);
