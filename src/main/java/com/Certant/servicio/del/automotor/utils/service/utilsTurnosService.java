@@ -38,7 +38,7 @@ public class utilsTurnosService {
 
             cliente = clientRepository.findAll().stream().filter(client -> client.getDni() == opcionDouble).findFirst().orElse(null);
         }else{
-            utilsClientService.ingresarClientes(clientRepository,1);
+            utilsClientService.ingresarClientes(clientRepository,opcionDouble);
             cliente = clientRepository.findAll().stream().filter(client -> client.getDni() == opcionDouble).findFirst().orElse(null);
         }
 

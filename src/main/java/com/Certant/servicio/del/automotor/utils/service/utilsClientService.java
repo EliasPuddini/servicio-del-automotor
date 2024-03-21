@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class utilsClientService {
 
-    public static void ingresarClientes(ClientRepository clientRepository,int contexto){
+    public static void ingresarClientes(ClientRepository clientRepository,double contexto){
 
         int flag = 0;
         double opcionDouble;
@@ -21,8 +21,13 @@ public class utilsClientService {
             do{
                 System.out.println("ingresar el nombre");
                 opcionString = lectura.next();
-                System.out.println("ingresar el DNI");
-                opcionDouble = lectura.nextDouble();
+
+                if(contexto != 0){
+                 opcionDouble = contexto;
+                }else {
+                    System.out.println("ingresar el DNI");
+                    opcionDouble = lectura.nextDouble();
+                }
 
                 if(clienteExistente(clientRepository,opcionDouble)){
                     System.out.println("DNI existente en la base de datos.Quiere ingresar otro cliente nuevo?");

@@ -140,12 +140,13 @@ public class utilsServicioService {
     }
     public static boolean existe(ServicioRepository servicioRepository, Servicio servicio1){
 
-        return servicioRepository.findAll().stream().anyMatch(servicio ->
+        Long cantidad = servicioRepository.findAll().stream().filter(servicio ->
 
                 servicio.getAceiteyfiltro() == servicio1.getAceiteyfiltro() &&
                         servicio.getAlineacionybalanceo() == servicio1.getAlineacionybalanceo() &&
                         servicio.getLavado() == servicio1.getLavado()
-        );
+        ).count();
+        return  cantidad != 0;
     }
 
     public static Servicio encontrar(ServicioRepository servicioRepository, Servicio servicio1){
