@@ -10,6 +10,7 @@ import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -140,13 +141,19 @@ public class utilsServicioService {
     }
     public static boolean existe(ServicioRepository servicioRepository, Servicio servicio1){
 
+        return !servicioRepository.findAll().stream().filter(servicio ->
+
+                Objects.equals(servicio.getAceiteyfiltro(), servicio1.getAceiteyfiltro()) &&
+                        Objects.equals(servicio.getAlineacionybalanceo(), servicio1.getAlineacionybalanceo()) &&
+                        Objects.equals(servicio.getLavado(), servicio1.getLavado())).collect(Collectors.toList()).isEmpty();
+        /*
         Long cantidad = servicioRepository.findAll().stream().filter(servicio ->
 
-                servicio.getAceiteyfiltro() == servicio1.getAceiteyfiltro() &&
-                        servicio.getAlineacionybalanceo() == servicio1.getAlineacionybalanceo() &&
-                        servicio.getLavado() == servicio1.getLavado()
+                Objects.equals(servicio.getAceiteyfiltro(), servicio1.getAceiteyfiltro()) &&
+                        Objects.equals(servicio.getAlineacionybalanceo(), servicio1.getAlineacionybalanceo()) &&
+                        Objects.equals(servicio.getLavado(), servicio1.getLavado())
         ).count();
-        return  cantidad != 0;
+        return  cantidad != 0;*/
     }
 
     public static Servicio encontrar(ServicioRepository servicioRepository, Servicio servicio1){

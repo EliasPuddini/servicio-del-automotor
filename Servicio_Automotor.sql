@@ -28,15 +28,16 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   `tipo_cliente` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_m6ysdwsqke00e5piajbvgn6lg` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla servicio_automotor.clientes: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla servicio_automotor.clientes: ~4 rows (aproximadamente)
 INSERT INTO `clientes` (`id`, `dni`, `nombre`, `servicios_previos`, `tipo_cliente`) VALUES
 	(1, 44395233, 'Elias_Puddini', 1, 'Normal'),
 	(2, 48512465, 'Lautaro_Puddini', 0, 'Normal'),
 	(3, 40254987, 'Franco_Puddini', 0, 'Normal'),
 	(4, 30215485, 'Hernan_Castilla', 0, 'Normal'),
-	(5, 28154965, 'Leon_Puddini', 0, 'Normal');
+	(5, 28154965, 'Leon_Puddini', 0, 'Normal'),
+	(6, 30210548, 'Armando_Maradona', 1, 'Normal');
 
 -- Volcando estructura para tabla servicio_automotor.servicio
 CREATE TABLE IF NOT EXISTS `servicio` (
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `servicio` (
   `alineacionybalanceo` varchar(255) DEFAULT NULL,
   `lavado` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla servicio_automotor.servicio: ~60 rows (aproximadamente)
 INSERT INTO `servicio` (`id`, `aceiteyfiltro`, `alineacionybalanceo`, `lavado`) VALUES
@@ -123,11 +124,12 @@ CREATE TABLE IF NOT EXISTS `turno` (
   UNIQUE KEY `UK_ftaf8949jlemdd3rmo93h32vs` (`servicio_id`),
   CONSTRAINT `FKk0ocq8hmjgn0m8xaxj6oxvopv` FOREIGN KEY (`servicio_id`) REFERENCES `servicio` (`id`),
   CONSTRAINT `FKm6wka9bmorib6a24gp5qd8l53` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla servicio_automotor.turno: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla servicio_automotor.turno: ~2 rows (aproximadamente)
 INSERT INTO `turno` (`id`, `fecha`, `patente`, `precio`, `cliente_id`, `servicio_id`) VALUES
-	(1, '2024-03-17 15:30:00.000000', 'ABC457', 250000, 1, 1);
+	(1, '2024-03-17 15:30:00.000000', 'ABC457', 250000, 1, 1),
+	(2, '2024-03-25 15:00:00.000000', 'CSX598', 84500, 6, 51);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
