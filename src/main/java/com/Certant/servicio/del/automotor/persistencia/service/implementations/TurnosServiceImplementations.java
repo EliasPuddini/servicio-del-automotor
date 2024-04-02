@@ -1,11 +1,11 @@
-package com.Certant.servicio.del.automotor.service.implementations;
+package com.Certant.servicio.del.automotor.persistencia.service.implementations;
 
 import com.Certant.servicio.del.automotor.dto.TurnoDTO;
-import com.Certant.servicio.del.automotor.models.Turno;
-import com.Certant.servicio.del.automotor.repositories.ClientRepository;
-import com.Certant.servicio.del.automotor.repositories.ServicioRepository;
-import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
-import com.Certant.servicio.del.automotor.service.TurnosService;
+import com.Certant.servicio.del.automotor.logica.Turno;
+import com.Certant.servicio.del.automotor.persistencia.repositories.ClientRepository;
+import com.Certant.servicio.del.automotor.persistencia.repositories.ServicioRepository;
+import com.Certant.servicio.del.automotor.persistencia.repositories.TurnoRepository;
+import com.Certant.servicio.del.automotor.persistencia.service.TurnosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

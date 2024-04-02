@@ -1,16 +1,14 @@
-package com.Certant.servicio.del.automotor.service.implementations;
+package com.Certant.servicio.del.automotor.persistencia.service.implementations;
 
 import com.Certant.servicio.del.automotor.dto.ServicioDTO;
-import com.Certant.servicio.del.automotor.models.Client;
-import com.Certant.servicio.del.automotor.models.Servicio;
-import com.Certant.servicio.del.automotor.repositories.ServicioRepository;
-import com.Certant.servicio.del.automotor.service.ServicioService;
+import com.Certant.servicio.del.automotor.logica.Servicio;
+import com.Certant.servicio.del.automotor.persistencia.repositories.ServicioRepository;
+import com.Certant.servicio.del.automotor.persistencia.service.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 

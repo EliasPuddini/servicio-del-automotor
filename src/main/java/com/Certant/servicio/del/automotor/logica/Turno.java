@@ -1,4 +1,4 @@
-package com.Certant.servicio.del.automotor.models;
+package com.Certant.servicio.del.automotor.logica;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;

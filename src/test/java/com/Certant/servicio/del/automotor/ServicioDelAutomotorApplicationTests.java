@@ -1,15 +1,15 @@
 package com.Certant.servicio.del.automotor;
 
-import com.Certant.servicio.del.automotor.models.Client;
-import com.Certant.servicio.del.automotor.models.Servicio;
-import com.Certant.servicio.del.automotor.models.Turno;
-import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
-import com.Certant.servicio.del.automotor.service.implementations.ClientServiceImplementations;
-import com.Certant.servicio.del.automotor.service.implementations.TurnosServiceImplementations;
-import com.Certant.servicio.del.automotor.service.implementations.ServicioServiceImplementations;
+import com.Certant.servicio.del.automotor.logica.Client;
+import com.Certant.servicio.del.automotor.logica.Servicio;
+import com.Certant.servicio.del.automotor.logica.Turno;
+import com.Certant.servicio.del.automotor.persistencia.repositories.TurnoRepository;
+import com.Certant.servicio.del.automotor.persistencia.service.implementations.ClientServiceImplementations;
+import com.Certant.servicio.del.automotor.persistencia.service.implementations.TurnosServiceImplementations;
+import com.Certant.servicio.del.automotor.persistencia.service.implementations.ServicioServiceImplementations;
 import com.Certant.servicio.del.automotor.utils.service.utilsClientService;
 import com.Certant.servicio.del.automotor.utils.service.utilsTurnosService;
-import com.Certant.servicio.del.automotor.repositories.ClientRepository;
+import com.Certant.servicio.del.automotor.persistencia.repositories.ClientRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la funcion init de ServicioDelAutomotorApplication si quieren ejecutar los test

@@ -1,9 +1,8 @@
-package com.Certant.servicio.del.automotor.service;
+package com.Certant.servicio.del.automotor.persistencia.service;
 
 import com.Certant.servicio.del.automotor.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.dto.ServicioDTO;
-import com.Certant.servicio.del.automotor.models.Client;
-import com.Certant.servicio.del.automotor.models.Servicio;
+import com.Certant.servicio.del.automotor.logica.Servicio;
 
 import java.util.List;
 import java.util.Optional;
