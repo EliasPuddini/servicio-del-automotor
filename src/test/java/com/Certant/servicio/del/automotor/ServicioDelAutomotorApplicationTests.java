@@ -4,9 +4,9 @@ import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Servicio;
 import com.Certant.servicio.del.automotor.models.Turno;
 import com.Certant.servicio.del.automotor.repositories.TurnoRepository;
-import com.Certant.servicio.del.automotor.service.implementations.ClientServiceImplementations;
-import com.Certant.servicio.del.automotor.service.implementations.TurnosServiceImplementations;
-import com.Certant.servicio.del.automotor.service.implementations.ServicioServiceImplementations;
+import com.Certant.servicio.del.automotor.service.ClientService;
+import com.Certant.servicio.del.automotor.service.ServicioService;
+import com.Certant.servicio.del.automotor.service.TurnosService;
 import com.Certant.servicio.del.automotor.utils.service.utilsClientService;
 import com.Certant.servicio.del.automotor.utils.service.utilsTurnosService;
 import com.Certant.servicio.del.automotor.repositories.ClientRepository;
@@ -17,7 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la funcion init de ServicioDelAutomotorApplication si quieren ejecutar los test
@@ -27,11 +26,11 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 	@Autowired
 	TurnoRepository turnoRepository;
 	@Autowired
-	ClientServiceImplementations clientServiceImplementations;
+	ClientService clientServiceImplementations;
 	@Autowired
-	TurnosServiceImplementations turnosServiceImplementations;
+	TurnosService turnosServiceImplementations;
 	@Autowired
-	ServicioServiceImplementations servicioServiceImplementations;
+	ServicioService servicioServiceImplementations;
 
 
 	//test de los servicios del menu
@@ -85,10 +84,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1,operacion2;
 
 		clientServiceImplementations.saveClient(cliente);
-		operacion1 = clientServiceImplementations.getClient(cliente.getId()).isPresent();
+		operacion1 = clientServiceImplementations.getClient(cliente.getId()).equals(cliente);
 
 		clientServiceImplementations.deleteClient(cliente.getId());
-		operacion2 = clientServiceImplementations.getClient(cliente.getId()).isEmpty();
+		operacion2 = clientServiceImplementations.getClient(cliente.getId()) == null;
 
 		Assertions.assertTrue(operacion1&&operacion2);
 	}
@@ -99,10 +98,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1, operacion2;
 
 		servicioServiceImplementations.saveServicio(servicio);
-		operacion1 = servicioServiceImplementations.getServicio(servicio.getId()).isPresent();
+		operacion1 = servicioServiceImplementations.getServicio(servicio.getId()).equals(servicio);
 
 		servicioServiceImplementations.deleteServicio(servicio.getId());
-		operacion2 = servicioServiceImplementations.getServicio(servicio.getId()).isEmpty();
+		operacion2 = servicioServiceImplementations.getServicio(servicio.getId()) == null;
 
 		Assertions.assertTrue(operacion1&&operacion2);
 	}
@@ -115,10 +114,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1, operacion2;
 
 		turnosServiceImplementations.saveTurno(turno);
-		operacion1 = turnosServiceImplementations.getTurnoDTO(turno.getId()).isPresent();
+		operacion1 = turnosServiceImplementations.getTurnoDTO(turno.getId()).equals(turno);
 
 		turnosServiceImplementations.deleteTurno(turno.getId());
-		operacion2 = turnosServiceImplementations.getTurnoDTO(turno.getId()).isEmpty();
+		operacion2 = turnosServiceImplementations.getTurnoDTO(turno.getId()) == null;
 
 		clientServiceImplementations.deleteClient(turno.getCliente().getId());
 		servicioServiceImplementations.deleteServicio(turno.getCliente().getId());

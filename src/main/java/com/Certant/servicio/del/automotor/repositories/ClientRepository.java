@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@RepositoryRestResource
+@Repository
 public interface ClientRepository extends JpaRepository<Client,Long> {
 
 }

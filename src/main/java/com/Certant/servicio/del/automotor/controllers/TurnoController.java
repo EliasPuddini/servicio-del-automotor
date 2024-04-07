@@ -1,11 +1,7 @@
 package com.Certant.servicio.del.automotor.controllers;
 
-import com.Certant.servicio.del.automotor.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.dto.TurnoDTO;
-import com.Certant.servicio.del.automotor.models.Client;
 import com.Certant.servicio.del.automotor.models.Turno;
-import com.Certant.servicio.del.automotor.repositories.ClientRepository;
-import com.Certant.servicio.del.automotor.service.ClientService;
 import com.Certant.servicio.del.automotor.service.TurnosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +22,7 @@ public class TurnoController {
     }
 
     @GetMapping("/{turnoId}")
-    public Optional<Turno>  getById(@PathVariable("turnoId") Long turnoId){
+    public TurnoDTO  getById(@PathVariable("turnoId") Long turnoId){
         return turnosService.getTurnoDTO(turnoId);
     }
 
