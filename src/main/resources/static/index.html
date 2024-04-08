@@ -24,13 +24,19 @@
                </tr> 
             </thead>
             <tbody>
-                
+                <tr v-for="cliente in clientes" v-bind:key="usuario">
+                    <td>{{cliente.id}}</td>
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.dni}}</td>
+                    <td>{{cliente.tipoCliente}}</td>
+                    <td>{{cliente.serviciosPrevios}}</td>
+                </tr>
+
+                </div>
             </tbody>
         </table>
 
-        <div id="contenedor1">
-
-        </div>
+        
 
     </div>
 

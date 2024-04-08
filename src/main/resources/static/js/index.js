@@ -5,7 +5,7 @@ const app = createApp({
     data(){
         return{
             clientes: [],
-            fragment: document.createDocumentFragment()
+            contenedorClientes: ""
         }
     },
     created(){
@@ -15,13 +15,10 @@ const app = createApp({
         getData(){
             axios.get("http://localhost:8080/api/clients")
             .then(response => {
-                this.clientes = response.data
-                console.log(this.clientes)
+                this.clientes = response.data;
+                console.log(this.clientes);
             })
-            .catch(error =>  {console.log(error)})
-        },
-        CreateLine(){
-            
+            .catch(error =>  {console.log(error)});
         }
     }
 
