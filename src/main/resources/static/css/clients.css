@@ -1,6 +1,6 @@
 body{
-    background-color: #15202b;
-    color: white;
+    background-color: #15202b !important;
+    color: white !important;
     font-family: Arial, sans-serif;
 }
 
@@ -19,17 +19,21 @@ nav{
 }
 
 nav h1{
-    width: 40%;
+    width: 60%;
 }
 
-nav .links{
-    width: 60%;
+.links{
+    width: 40%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .links ul{
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
 }
 
 .links li{
@@ -37,13 +41,12 @@ nav .links{
     list-style-type: none;
 }
 
-
-
-
 a{
     text-decoration: inherit !important;
     color: inherit !important;
 }
+
+
 
 .ingreso {
     width: 100%;
@@ -55,7 +58,9 @@ a{
     flex-direction: column; /* Apilar elementos uno encima del otro */
     justify-content: center; /* Centrar verticalmente los elementos */
     align-items: center; /* Centrar horizontalmente los elementos */
-    
+    border-radius: 25% !important;
+    border-color: #000 !important;
+    margin-top: 20px;
 }
 .ingreso *{
     padding:  1%;
@@ -64,6 +69,12 @@ a{
 .ingreso button{
     margin-top: 3%;
     padding: 1%;
+}
+
+.table-responsive {
+    overflow-y: auto !important;
+    max-height: calc(100vh - 300px);
+    /*max-height: 400px;*/
 }
 
 
@@ -76,6 +87,17 @@ table {
     overflow-y: auto; /* Agregar scroll vertical */
 }
 
+.busqueda{
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+
+}
+
+.busqueda th{
+    width: 50%;
+}
+
 th, td {
     border: 1px solid black;
     padding: 8px;
@@ -84,9 +106,4 @@ th, td {
 
 th {
     background-color: #333;
-}
-
-.tabla-scroll {
-    overflow-y: auto; /* Agregar scroll vertical */
-    max-height: calc(100vh - 300px); /* Altura máxima de la tabla con scroll */
 }
