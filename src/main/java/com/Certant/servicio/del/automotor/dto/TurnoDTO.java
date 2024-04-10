@@ -12,6 +12,7 @@ public class TurnoDTO {
     private Servicio servicio;
     private LocalDateTime fecha;
     private String patente;
+    private double precio;
 
     public TurnoDTO(Turno turno){
         this.id = turno.getId();
@@ -19,6 +20,7 @@ public class TurnoDTO {
         this.servicio = turno.getServicio();
         this.fecha = turno.getFecha();
         this.patente = turno.getPatente();
+        this.precio = turno.getPrecio();
     }
 
     public Long getId(){
@@ -39,5 +41,9 @@ public class TurnoDTO {
 
     public String getPatente() {
         return patente;
+    }
+
+    public double getPrecio() {
+        return precio;
     }
 }

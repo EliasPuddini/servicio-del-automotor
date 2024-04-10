@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface TurnosService {
     List<TurnoDTO> getTurnosDTO();
 
-    Optional<Turno> getTurnoDTO(Long id);
+    TurnoDTO getTurnoDTO(Long id);
     void saveTurno(Turno turno);
 
     void deleteTurno(Long id);

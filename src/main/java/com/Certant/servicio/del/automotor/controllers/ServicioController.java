@@ -22,7 +22,7 @@ public class ServicioController {
     }
 
     @GetMapping("/{servicioId}")
-    public Optional<Servicio> getById(@PathVariable("servicioId") Long servicioId){
+    public ServicioDTO getById(@PathVariable("servicioId") Long servicioId){
         return servicioService.getServicio(servicioId);
     }
 

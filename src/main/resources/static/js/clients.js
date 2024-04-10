@@ -76,7 +76,7 @@ const app = createApp({
             const response = await axios.post('http://localhost:8080/api/clients', {
                 nombre: this.apellido,
                 dni: this.dni,
-                serviciosPrevios: "Normal"
+                tipoCliente: "Normal"
             });
             console.log('Respuesta de la API:', response.data);
         } catch (error) {

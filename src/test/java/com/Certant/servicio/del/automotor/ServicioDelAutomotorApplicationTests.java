@@ -85,10 +85,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1,operacion2;
 
 		clientServiceImplementations.saveClient(cliente);
-		operacion1 = clientServiceImplementations.getClient(cliente.getId()).isPresent();
+		operacion1 = clientServiceImplementations.getClient(cliente.getId()) != null;
 
 		clientServiceImplementations.deleteClient(cliente.getId());
-		operacion2 = clientServiceImplementations.getClient(cliente.getId()).isEmpty();
+		operacion2 = clientServiceImplementations.getClient(cliente.getId()) == null;
 
 		Assertions.assertTrue(operacion1&&operacion2);
 	}
@@ -99,10 +99,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1, operacion2;
 
 		servicioServiceImplementations.saveServicio(servicio);
-		operacion1 = servicioServiceImplementations.getServicio(servicio.getId()).isPresent();
+		operacion1 = servicioServiceImplementations.getServicio(servicio.getId()) != null;
 
 		servicioServiceImplementations.deleteServicio(servicio.getId());
-		operacion2 = servicioServiceImplementations.getServicio(servicio.getId()).isEmpty();
+		operacion2 = servicioServiceImplementations.getServicio(servicio.getId()) == null;
 
 		Assertions.assertTrue(operacion1&&operacion2);
 	}
@@ -115,10 +115,10 @@ public class ServicioDelAutomotorApplicationTests {//comentar el @Bean en la fun
 		boolean operacion1, operacion2;
 
 		turnosServiceImplementations.saveTurno(turno);
-		operacion1 = turnosServiceImplementations.getTurnoDTO(turno.getId()).isPresent();
+		operacion1 = turnosServiceImplementations.getTurnoDTO(turno.getId()) != null;
 
 		turnosServiceImplementations.deleteTurno(turno.getId());
-		operacion2 = turnosServiceImplementations.getTurnoDTO(turno.getId()).isEmpty();
+		operacion2 = turnosServiceImplementations.getTurnoDTO(turno.getId()) == null;
 
 		clientServiceImplementations.deleteClient(turno.getCliente().getId());
 		servicioServiceImplementations.deleteServicio(turno.getCliente().getId());

@@ -30,10 +30,12 @@
         <div class="ingreso">
             
             <h3>Ingresar un turno</h3>
-            <label>Nombre o dni del cliente</label>
+            <label>Nombre del cliente</label>
             <input type ="text" v-model="nombre">
-            <label>Patente</label>
+            <label>DNI del cliente</label>
             <input type="text" v-model="dni">
+            <label>Patente</label>
+            <input type="text" v-model="patente">
             <label>Fecha(AAAA-MM-DD)</label>
             <input type="text" v-model="fecha">
             <label>Hora(HH:MM)</label>
@@ -62,6 +64,8 @@
                     <option value="Lavado Completo"></option>
                     <option value="Lavado Premium"></option>
                 </datalist>
+            <label>Precio</label>
+            <input type="text" v-model="precio">
             <button @click="postearDatos" class="btn btn-primary btn-lg">Ingresar</button>
         </div>
         
@@ -69,18 +73,26 @@
             <table class="table table-dark table-striped fixed-header">
                 <thead>
                     <tr class="busqueda">
-                        <th>
+                        <td>
                             <label>Buscar por DNI:</label>
-                            <input type="text" v-model="buscadorDNI" @input="filtrar">
-                        </th>
-                        <th>
+                            <input type="text" v-model="buscadorDNI" @change="filtrar" @input="filtrar">
+                        </td>
+                        <td>
                             <label>Buscar por Nombre:</label>
                             <input type="text" v-model="buscadorNombre" @input="filtrar">
-                        </th>
-                        <th>
+                        </td>
+                        <td>
+                            <label>Buscar por Patente:</label>
+                            <input type="text" v-model="buscadorPatente" @input="filtrar">
+                        </td>
+                        <td>
                             <label>Turnos Pasados</label>
                             <input type="checkbox" v-model="pasados" @change="filtrar">
-                        </th>
+                        </td>
+                        <td>
+                            <label>Turnos Futuros</label>
+                            <input type="checkbox" v-model="futuros" @change="filtrar">
+                        </td>
                     </tr>
                     <tr>
                         <th>Id</th>
@@ -88,6 +100,7 @@
                         <th>DNI del Cliente</th>
                         <th>Tipo de Cliente</th>
                         <th>Patente</th>
+                        <th>Precio</th>
                         <th>Fecha y Hora</th>
                         <th>Alineacion y Balanceo</th>
                         <th>Aceite y Filtro</th>
@@ -102,6 +115,7 @@
                         <td>{{turno.cliente.dni}}</td>
                         <td>{{turno.cliente.tipoCliente}}</td>
                         <td>{{turno.patente}}</td>
+                        <td>{{turno.precio}}</td>
                         <td>{{turno.fecha}}</td>
                         <td>{{turno.servicio.alineacionybalanceo}}</td>
                         <td>{{turno.servicio.aceiteyfiltro}}</td>

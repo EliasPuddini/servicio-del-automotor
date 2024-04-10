@@ -25,8 +25,8 @@ public class ServicioServiceImplementations implements ServicioService {
         return servicioRepository.findAll().stream().map(servicio -> new ServicioDTO(servicio)).collect(toList());
     }
     @Override
-    public Optional<Servicio> getServicio(Long id){
-        return servicioRepository.findById(id);
+    public ServicioDTO getServicio(Long id){
+        return servicioRepository.findById(id).map(ServicioDTO::new).orElse(null);
     }
     @Override
     public void deleteServicio(Long id){

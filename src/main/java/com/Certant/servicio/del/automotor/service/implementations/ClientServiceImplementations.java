@@ -24,8 +24,8 @@ public class ClientServiceImplementations implements ClientService {
     }
 
     @Override
-    public Optional<Client> getClient(Long id){
-        return clientRepository.findById(id);
+    public ClientDTO getClient(Long id){
+        return clientRepository.findById(id).map(ClientDTO ::new).orElse(null);
     };
 
     @Override

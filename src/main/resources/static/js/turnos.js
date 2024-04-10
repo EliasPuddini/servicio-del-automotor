@@ -7,14 +7,18 @@ const app = createApp({
       turnosFiltrados: [],
       nombre: "",
       dni:"",
+      patente: "",
       fecha:"",
       hora:"",
       alineacionybalanceo: "",
       cambiodeaceite: "",
       lavado: "",
+      precio: "",
       pasados: false,
       buscadorDNI: "",
-      buscadorNombre: ""
+      buscadorNombre: "",
+      buscadorPatente: "",
+      futuros: false
     };
   },
   created() {
@@ -36,64 +40,99 @@ const app = createApp({
     filtrar() {
       this.filtrarTurnos();
     },
-    obtenerFecha(elemento){
-        const elementoN = new Date(elemento.fecha);
-        return elementoN.getDate();
-    },
-    obtenerHorario(elemento){
-        const elementoN = new Date(elemento.fecha);
-        const hora = elementoN.getHours();
-        const minutos = elementoN.getMinutes();
+    esPrevio(date1){
 
-        return hora + minutos;
+        let fecha1 = new Date(date1)
+        let fecha2 = new Date()
+
+        return fecha1.getTime() < fecha2.getTime();
+    },
+    esPosterior(date1){
+        let fecha1 = new Date(date1)
+        let fecha2 = new Date()
+
+        return fecha1.getTime() >= fecha2.getTime();
+    },
+    obtenerLocalDateTime(date1,date2){
+
+        let date = new Date(date1);
+        const [hora, minutos] = date2.split(":");
+        date.setHours(hora);
+        date.setMinutes(minutos);
+        
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let hour = date.getHours();
+        let minute = date.getMinutes();
+        let second = date.getSeconds();
+
+        // Crear un objeto LocalDateTime
+        return localDateTime = year + "-" + month.toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0") + "T" +
+            hour.toString().padStart(2, "0") + ":" + minute.toString().padStart(2, "0") + ":" + second.toString().padStart(2, "0");
+
     },
     filtrarTurnos() {
 
-        let filtro1 = false;
-
+        if(this.futuros){
+            this.turnosFiltrados = this.turnos.filter(element => this.esPosterior(element.fecha));
+        
+        }
         if(this.pasados){
-            this.turnosFiltrados = this.turnos.filter(element => this.obtenerFecha(element) < this.fecha && this.obtenerHorario(element) < this.hora);
-            this.filtro1 = true;
-        }
-        if(this.buscadorNombre != ""){
+            this.turnosFiltrados = this.turnos.filter(element => this.esPrevio(element.fecha));
             
-            if(this.filtro1){
-                this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.nombre == this.buscadorNombre);
-            }else{
-                this.turnosFiltrados = this.turnos.filter(element => element.cliente.nombre == this.buscadorNombre)
-            }
         }
-        if(this.buscadorDNI != ""){
+            
+            
+        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.nombre.toLowerCase().includes(this.buscadorNombre));
+        
+        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.dni.toString().includes(this.buscadorDNI.toString()));
 
-            if(this.filtro1){
-                this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.dni.toString().includes(this.buscadorDNI.toString()));
-            }else{
-                this.turnosFiltrados = this.turnos.filter(element => element.cliente.dni.toString().includes(this.buscadorDNI.toString()));
-            }
-        }
-        if(!this.pasados && this.buscadorDNI == "" && this.buscadorNombre == ""){
+        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.patente.toLowerCase().includes(this.buscadorPatente))
+        
+        if(!this.futuros && !this.pasados && this.buscadorDNI == "" && this.buscadorNombre == "" && this.buscadorPatente == ""){
             this.turnosFiltrados = this.turnos;
-            this.filtro1 = false;
         }
     },
+    todoBienPost(){
+        
+        let condicional1 = this.nombre != "" && this.dni != "";
+        let condicional2 = this.alineacionybalanceo != "" && this.cambiodeaceite != "" && this.lavado !="";
+        let condicional3 = this.precio != "" && this.fecha != "" && this.hora != "" && this.patente != ""
+
+        return condicional1 && condicional2 && condicional3
+    },
     async postearDatos() {
-      //TODO
-        if(false){
+      
+        if(this.todoBienPost()){
         try {
             
-            const response = await axios.post('http://localhost:8080/api/clients', {
-                nombre: this.apellido,
-                dni: this.dni,
-                serviciosPrevios: "Normal"
+            const response = await axios.post('http://localhost:8080/api/turnos', {
+                
+                precio: this.precio,
+                cliente: {
+                    nombre: this.nombre,
+                    dni:this.dni,
+                    tipoCliente: "Normal"
+                },
+                servicio:{
+                    alineacionybalanceo: this.alineacionybalanceo,
+                    aceiteyfiltro: this.cambiodeaceite,
+                    lavado: this.lavado
+                },
+                fecha: this.obtenerLocalDateTime(this.fecha,this.hora),
+                patente: this.patente
+
             });
             console.log('Respuesta de la API:', response.data);
         } catch (error) {
             console.error('Error al enviar los datos:', error);
         }
       }else{
-        alert("No se puede ingresar un cliente sin su nombre y dni.")
+        alert("No se puede ingresar el turno por errores en los campos del turno.")
       }
         
     }
+
   }
 }).mount("#app");

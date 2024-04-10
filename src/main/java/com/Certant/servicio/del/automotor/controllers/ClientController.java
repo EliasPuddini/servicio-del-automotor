@@ -25,7 +25,7 @@ public class ClientController {
     }
 
     @GetMapping("/{clientId}")
-    public Optional<Client> getById(@PathVariable("clientId") Long clientId){
+    public ClientDTO getById(@PathVariable("clientId") Long clientId){
         return clientService.getClient(clientId);
     }
 

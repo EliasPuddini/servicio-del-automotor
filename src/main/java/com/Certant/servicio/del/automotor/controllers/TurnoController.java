@@ -26,7 +26,7 @@ public class TurnoController {
     }
 
     @GetMapping("/{turnoId}")
-    public Optional<Turno>  getById(@PathVariable("turnoId") Long turnoId){
+    public TurnoDTO  getById(@PathVariable("turnoId") Long turnoId){
         return turnosService.getTurnoDTO(turnoId);
     }
 

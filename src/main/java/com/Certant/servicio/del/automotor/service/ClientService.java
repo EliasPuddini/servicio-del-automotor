@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface ClientService {
     List<ClientDTO> getClientsDTO();
 
-    Optional<Client> getClient(Long id);
+    ClientDTO getClient(Long id);
 
     void deleteClient(Long id);
     void saveClient(Client client);

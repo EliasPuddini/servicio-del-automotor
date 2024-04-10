@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ServicioService {
     List<ServicioDTO> getServiciosDTO();
 
-    Optional<Servicio> getServicio(Long id);
+    ServicioDTO getServicio(Long id);
     void deleteServicio(Long id);
     void saveServicio(Servicio servicio);
 
