@@ -7,3 +7,5 @@ Cosas a tener en cuenta de la base de datos:
   Se uso Laragon para el uso y gestion de la base de datos.
   El utilizado es usuario "root" y usa la contraseña "1234".
   Para la configuración del la base de datos, solo hay que ejecutar el archivo como un archivo SQL, el cual viene con datos en su interior.
+
+Revisar la rama Full Stack para ver los datos en una pagina web.
