@@ -39,17 +39,31 @@ public class TurnosServiceImplementations implements TurnosService {
 
         Servicio servicio = turno.getServicio();
         Client cliente = turno.getCliente();
-        cliente.updateServicecounter();
 
-        if(servicioRepository.findAll().stream().noneMatch(servicioN -> Objects.equals(servicioN.getLavado(), servicio.getLavado())
-                                                        && Objects.equals(servicioN.getAceiteyfiltro(),servicio.getAceiteyfiltro())
-                                                        && Objects.equals(servicioN.getAlineacionybalanceo(), servicio.getAlineacionybalanceo())
+        Servicio finalServicio = servicio;
+        Client finalCliente = cliente;
+
+        if(servicioRepository.findAll().stream().noneMatch(servicioN -> Objects.equals(servicioN.getLavado(), finalServicio.getLavado())
+                                                        && Objects.equals(servicioN.getAceiteyfiltro(),finalServicio.getAceiteyfiltro())
+                                                        && Objects.equals(servicioN.getAlineacionybalanceo(), finalServicio.getAlineacionybalanceo())
                                                         )){
             servicioRepository.save(turno.getServicio());
+        }else{
+
+            servicio = servicioRepository.findAll().stream().filter(servicioN -> Objects.equals(servicioN.getLavado(), finalServicio.getLavado())
+                    && Objects.equals(servicioN.getAceiteyfiltro(), finalServicio.getAceiteyfiltro())
+                    && Objects.equals(servicioN.getAlineacionybalanceo(), finalServicio.getAlineacionybalanceo())).findFirst().orElse(null);
+            turno.setServicio(servicio);
         }
-        if(clientRepository.findAll().stream().noneMatch(clienteN -> clienteN.getDni() == cliente.getDni())){
+
+        if(clientRepository.findAll().stream().noneMatch(clienteN -> clienteN.getDni() == finalCliente.getDni())){
             clientRepository.save(turno.getCliente());
+        }else{
+            cliente = clientRepository.findAll().stream().filter(client -> client.getDni() == finalCliente.getDni()).findFirst().orElse(null);
+            turno.setCliente(cliente);
         }
+
+
 
         turnoRepository.save(turno);
     }
