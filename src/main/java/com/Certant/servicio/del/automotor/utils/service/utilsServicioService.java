@@ -31,7 +31,7 @@ public class utilsServicioService {
             opcionString1 = gestionarAYB();
 
         } else {
-            opcionString1 = "no";
+            opcionString1 = "No";
         }
 
         System.out.println("Se cambiara el aceite?");
@@ -40,7 +40,7 @@ public class utilsServicioService {
         if (opcionString2.equals("si")) {
             opcionString2 = gestionarCAF();
         } else {
-            opcionString2 = opcionString2 = "no";
+            opcionString2 = opcionString2 = "No";
         }
 
 
@@ -50,7 +50,7 @@ public class utilsServicioService {
         if (opcionString3.equals("si")) {
             opcionString3 = gestionarLavado();
         } else {
-            opcionString3 = "no";
+            opcionString3 = "No";
         }
 
 
@@ -79,9 +79,9 @@ public class utilsServicioService {
         opcionString1 = lectura.next();;
 
         if(opcionString1.equals("si")){
-            opcionString1 = "Con cambio de cubiertas.";
+            opcionString1 = "Con cambio de cubiertas";
         }else{
-            opcionString1 = "Sin cambio de cubiertas.";
+            opcionString1 = "Sin cambio de cubiertas";
         }
 
         return opcionString1;
@@ -91,26 +91,26 @@ public class utilsServicioService {
         Scanner lectura = new Scanner(System.in);
         String opcionString2;
 
-        System.out.println("el motor es diesel?");
+        System.out.println("El motor es diesel?");
         opcionString2 = lectura.next();
 
         if(opcionString2.equals("si")){
 
-            System.out.println("el aceite es de alto rendimiento?");
+            System.out.println("El aceite es de alto rendimiento?");
             opcionString2 = lectura.next();
 
             if(opcionString2.equals("si")){
-                opcionString2 = "alto rendimiento para motor diesel";
-            }else opcionString2 = "bajo rendimiento para motor diesel";
+                opcionString2 = "Alto rendimiento para motor diesel";
+            }else opcionString2 = "Bajo rendimiento para motor diesel";
 
         }else{
 
-            System.out.println("el aceite es de alto rendimiento?");
+            System.out.println("El aceite es de alto rendimiento?");
             opcionString2 = lectura.next();
 
             if(opcionString2.equals("si")){
-                opcionString2 = "alto rendimiento para motor naftero";
-            }else opcionString2 = "bajo rendimiento para motor naftero";
+                opcionString2 = "Alto rendimiento para motor naftero";
+            }else opcionString2 = "Bajo rendimiento para motor naftero";
         }
 
 
@@ -146,14 +146,6 @@ public class utilsServicioService {
                 Objects.equals(servicio.getAceiteyfiltro(), servicio1.getAceiteyfiltro()) &&
                         Objects.equals(servicio.getAlineacionybalanceo(), servicio1.getAlineacionybalanceo()) &&
                         Objects.equals(servicio.getLavado(), servicio1.getLavado())).collect(Collectors.toList()).isEmpty();
-        /*
-        Long cantidad = servicioRepository.findAll().stream().filter(servicio ->
-
-                Objects.equals(servicio.getAceiteyfiltro(), servicio1.getAceiteyfiltro()) &&
-                        Objects.equals(servicio.getAlineacionybalanceo(), servicio1.getAlineacionybalanceo()) &&
-                        Objects.equals(servicio.getLavado(), servicio1.getLavado())
-        ).count();
-        return  cantidad != 0;*/
     }
 
     public static Servicio encontrar(ServicioRepository servicioRepository, Servicio servicio1){

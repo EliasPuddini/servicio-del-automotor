@@ -5,6 +5,7 @@ const app = createApp({
     return {
       turnos: [],
       turnosFiltrados: [],
+      clientes: [],
       nombre: "",
       dni:"",
       patente: "",
@@ -30,8 +31,15 @@ const app = createApp({
         .get("http://localhost:8080/api/turnos")
         .then(response => {
           this.turnos = response.data;
-          console.log(this.turnos);
           this.turnosFiltrados = this.turnos;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      axios
+        .get("http://localhost:8080/api/clients")
+        .then(response => {
+          this.clientes = response.data;
         })
         .catch(error => {
           console.log(error);
@@ -72,27 +80,41 @@ const app = createApp({
             hour.toString().padStart(2, "0") + ":" + minute.toString().padStart(2, "0") + ":" + second.toString().padStart(2, "0");
 
     },
+    temporalidad(flag){
+      switch(flag){
+        case 1:
+          return this.turnos;
+        case 2:
+          return this.turnosFiltrados;
+        default:
+          return this.turnos;
+      }
+    },
     filtrarTurnos() {
 
-        if(this.futuros){
-            this.turnosFiltrados = this.turnos.filter(element => this.esPosterior(element.fecha));
-        
-        }
-        if(this.pasados){
-            this.turnosFiltrados = this.turnos.filter(element => this.esPrevio(element.fecha));
-            
-        }
-            
-            
-        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.nombre.toLowerCase().includes(this.buscadorNombre));
-        
-        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.dni.toString().includes(this.buscadorDNI.toString()));
+      this.turnosFiltrados = this.turnos;
 
-        this.turnosFiltrados = this.turnosFiltrados.filter(element => element.patente.toLowerCase().includes(this.buscadorPatente))
+      if(this.futuros && this.pasados){
+        this.turnosFiltrados = [];
+        return;
+      }
+      if(this.futuros){
+        this.turnosFiltrados = this.turnos.filter(element => this.esPosterior(element.fecha));
         
-        if(!this.futuros && !this.pasados && this.buscadorDNI == "" && this.buscadorNombre == "" && this.buscadorPatente == ""){
-            this.turnosFiltrados = this.turnos;
-        }
+      }
+      if(this.pasados){
+        this.turnosFiltrados = this.turnos.filter(element => this.esPrevio(element.fecha));
+        
+      }
+          
+          
+      this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.nombre.toLowerCase().includes(this.buscadorNombre));
+      this.turnosFiltrados = this.turnosFiltrados.filter(element => element.cliente.dni.toString().includes(this.buscadorDNI.toString()));
+      this.turnosFiltrados = this.turnosFiltrados.filter(element => element.patente.toLowerCase().includes(this.buscadorPatente))
+      
+      if(!this.futuros && !this.pasados && this.buscadorDNI == "" && this.buscadorNombre == "" && this.buscadorPatente == ""){
+          this.turnosFiltrados = this.turnos;
+      }
     },
     todoBienPost(){
         
@@ -102,12 +124,21 @@ const app = createApp({
 
         return condicional1 && condicional2 && condicional3
     },
+    noCoinciden(){
+        let coincidencia = true;
+        let clienteGuardado = clientes.filter(cliente => cliente.dni == this.dni);
+        
+        if(this.nombre != clienteGuardado.nombre && clienteGuardado != null){
+          return false;
+        }
+    },
     async postearDatos() {
       
-        if(this.todoBienPost()){
+      if(this.todoBienPost()){
         try {
-            
-            const response = await axios.post('http://localhost:8080/api/turnos', {
+
+            if(this.noCoinciden()){
+              const response = await axios.post('http://localhost:8080/api/turnos', {
                 
                 precio: this.precio,
                 cliente: {
@@ -123,8 +154,13 @@ const app = createApp({
                 fecha: this.obtenerLocalDateTime(this.fecha,this.hora),
                 patente: this.patente
 
-            });
-            console.log('Respuesta de la API:', response.data);
+              });
+              console.log('Respuesta de la API:', response.data);
+            }else{
+              alert("El dni y el nombre no corresponden a lo ingresado en la base de datos.");
+            }
+            
+            
         } catch (error) {
             console.error('Error al enviar los datos:', error);
         }

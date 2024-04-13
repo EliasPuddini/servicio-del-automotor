@@ -15,26 +15,6 @@ const app = createApp({
   created() {
     this.getData();
   },
-  computed: {
-    clientesFiltradosData() {
-      if (this.buscadorNombre == "" && this.buscadorDNI == "") {
-        return this.clientes;
-      }
-      if (this.buscadorNombre != "" && this.buscadorDNI != "") {
-        return this.filtrarPorNombre().filter(elemento =>
-          this.filtrarPorDNI().includes(elemento)
-        );
-      }
-
-      if (this.buscadorNombre != "") {
-        return this.filtrarPorNombre();
-      }
-      if (this.buscadorDNI != "") {
-        console.log("llego a dni");
-        return this.filtrarPorDNI();
-      }
-    }
-  },
   methods: {
     getData() {
       axios
@@ -49,28 +29,34 @@ const app = createApp({
         });
     },
     filtrar() {
-      this.clientesFiltrados = this.clientesFiltradosData;
+      this.clientesFiltrados = this.clientes;
+      this.clientesFiltrados = this.clientesFiltrados.filter(cliente =>cliente.nombre.toLowerCase().includes(this.buscadorNombre.toLowerCase()));
+      this.clientesFiltrados = this.clientesFiltrados.filter(cliente => cliente.dni.toString().includes(this.buscadorDNI));
     },
-    filtrarPorNombre() {
-      if (this.buscadorNombre && typeof this.buscadorNombre === 'string') { // Verificar si buscadorNombre tiene un valor y es un string
-        const busqueda = this.buscadorNombre.toLowerCase();
-        return this.clientes.filter(cliente =>
-          cliente.nombre.toLowerCase().includes(busqueda)
-        );
-      } else {
-        return this.clientes; // Devolver todos los clientes si no hay búsqueda válida
-      }
+    isBlank(str){
+      return !str || /^\s*$/.test(str); //la segunda parte es una expresión regular
     },
-    filtrarPorDNI() {
-      if (this.buscadorDNI) {
+    todoBien(){
 
-        return this.clientes.filter(cliente => cliente.dni.toString().includes(this.buscadorDNI));
-      } else {
-        return this.clientes; // Devolver todos los clientes si no hay búsqueda válida
+      let cliente = this.clientes.filter(cliente => cliente.dni.toString() == this.dni);
+
+      if(this.isBlank(this.dni) || this.isBlank(this.nombre)){
+        alert("Hay campos de introducción vacios.")
+        return false;
+      }
+
+      if(cliente.length != 0){
+        alert("El dni ya existe.");
+        console.log(cliente);
+        return false;
+      }
+
+      if(!this.isBlank(this.dni) && this.isBlank(this.nombre) && cliente.length == 0){
+        return true;
       }
     },
     async postearDatos() {
-      if(this.nombre == "" && this.dni == ""){
+      if(this.todoBien()){
         try {
             
             const response = await axios.post('http://localhost:8080/api/clients', {
@@ -82,8 +68,6 @@ const app = createApp({
         } catch (error) {
             console.error('Error al enviar los datos:', error);
         }
-      }else{
-        alert("No se puede ingresar un cliente sin su nombre y dni.")
       }
         
     }

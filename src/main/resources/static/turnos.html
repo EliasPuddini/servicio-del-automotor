@@ -30,43 +30,70 @@
         <div class="ingreso">
             
             <h3>Ingresar un turno</h3>
-            <label>Nombre del cliente</label>
-            <input type ="text" v-model="nombre">
-            <label>DNI del cliente</label>
-            <input type="text" v-model="dni">
-            <label>Patente</label>
-            <input type="text" v-model="patente">
-            <label>Fecha(AAAA-MM-DD)</label>
-            <input type="text" v-model="fecha">
-            <label>Hora(HH:MM)</label>
-            <input type="text" v-model="hora">
-            <label>Alineacion y Balanceo</label>
-            <input type="text" multiple v-model="alineacionybalanceo" list="alineacion">
-                <datalist id="alineacion">
-                    <option value="no"></option>
-                    <option value="Con cambio de cubiertas."></option>
-                    <option value="Sin cambio de cubiertas."></option>
-                </datalist>
-            <label>Cambio de Aceite y Filtro</label>
-            <input type="text" multiple v-model="cambiodeaceite" list="cambio">
-                <datalist id="cambio">
-                    <option value="no"></option>
-                    <option value="alto rendimiento para motor diesel"></option>
-                    <option value="bajo rendimiento para motor diesel"></option>
-                    <option value="alto rendimiento para motor naftero"></option>
-                    <option value="bajo rendimiento para motor naftero"></option>
-                </datalist>
-            <label>Lavado</label>
-            <input type="text" multiple v-model="lavado" list="lavado">
-                <datalist id="lavado">
-                    <option value="no"></option>
-                    <option value="Lavado Basico"></option>
-                    <option value="Lavado Completo"></option>
-                    <option value="Lavado Premium"></option>
-                </datalist>
-            <label>Precio</label>
-            <input type="text" v-model="precio">
-            <button @click="postearDatos" class="btn btn-primary btn-lg">Ingresar</button>
+            <div class="ingresodato">
+                <label>Nombre del cliente</label>
+                <input type ="text" v-model="nombre">
+            </div>
+            <div class="ingresodato">
+                <label>DNI del cliente</label>
+                <input type="text" v-model="dni">
+            </div>
+            <div class="ingresodato">
+                <label>Patente</label>
+                <input type="text" v-model="patente">
+            </div>
+            <div class="ingresodato">
+                <label>Fecha(AAAA-MM-DD)</label>
+                <input type="text" v-model="fecha">
+            </div>
+            <div class="ingresodato">
+                <label>Hora(HH:MM)</label>
+                <input type="text" v-model="hora">
+            </div>
+            <div class="ingresodato">
+                <label>Alineacion y Balanceo</label>
+                <input type="text" multiple v-model="alineacionybalanceo" list="alineacion">
+                    <datalist id="alineacion">
+                        <option value="No"></option>
+                        <option value="Con cambio de cubiertas."></option>
+                        <option value="Sin cambio de cubiertas."></option>
+                    </datalist>
+                    <!--
+                    <label for="alineacion">Alineacion y Balanceo</label>
+                        <select name="alineaciones" id="alineacion">
+                            <option value="No"></option>
+                            <option value="Con cambio de cubiertas."></option>
+                            <option value="Sin cambio de cubiertas."></option>
+                        </select>    
+                    <input type="text" v-model="alineacionybalanceo">-->
+            </div>
+            <div class="ingresodato">
+                <label>Cambio de Aceite y Filtro</label>
+                <input type="text" multiple v-model="cambiodeaceite" list="cambio">
+                    <datalist id="cambio">
+                        <option value="No"></option>
+                        <option value="Alto rendimiento para motor diesel"></option>
+                        <option value="Bajo rendimiento para motor diesel"></option>
+                        <option value="Alto rendimiento para motor naftero"></option>
+                        <option value="Bajo rendimiento para motor naftero"></option>
+                    </datalist>                
+            </div>
+            <div class="ingresodato">
+                <label>Lavado</label>
+                <input type="text" multiple v-model="lavado" list="lavado">
+                    <datalist id="lavado">
+                        <option value="no"></option>
+                        <option value="Lavado Basico"></option>
+                        <option value="Lavado Completo"></option>
+                        <option value="Lavado Premium"></option>
+                    </datalist>
+            </div>
+            <div class="ingresodato">
+                <label>Precio</label>
+                <input type="text" v-model="precio">
+                <button @click="postearDatos" class="btn btn-primary btn-lg">Ingresar</button>
+            </div>
+            
         </div>
         
         <div class="table-responsive">
