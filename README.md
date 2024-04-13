@@ -1,6 +1,7 @@
 Cosas a tener en cuenta del codigo:
-  La interfaz elegida fue la consola.
+  El codigo permite la modificación y visualización de los datos de la empresa por consola.
   Para probar los test, hay que comentar la etiqueta @Bean de la función init() en el archivo principal "ServicioDelAutomotorApplication.java".
+ La página web se encuentra en el localhost:8080/clients o /turnos
 
 Cosas a tener en cuenta de la base de datos:
   El archivo de la base de datos se encuentra al principio, "Servicio_Automotor.sql".

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turnos</title>
+    <link rel="stylesheet" href="css/turnos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="./img/servicio.jpg">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <h1>Servicio Automotor</h1>
+            <div class="links">
+                <ul>
+                    <li>
+                        <a href="./clients.html">Clientes</a>
+                    </li>
+                    <li>
+                        <a href="./turnos.html">Turnos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div id="app">
+        <div class="ingreso">
+            
+            <h3>Ingresar un turno</h3>
+            <div class="ingresodato">
+                <label>Nombre del cliente</label>
+                <input type ="text" v-model="nombre">
+            </div>
+            <div class="ingresodato">
+                <label>DNI del cliente</label>
+                <input type="text" v-model="dni">
+            </div>
+            <div class="ingresodato">
+                <label>Patente</label>
+                <input type="text" v-model="patente">
+            </div>
+            <div class="ingresodato">
+                <label>Fecha(AAAA-MM-DD)</label>
+                <input type="text" v-model="fecha">
+            </div>
+            <div class="ingresodato">
+                <label>Hora(HH:MM)</label>
+                <input type="text" v-model="hora">
+            </div>
+            <div class="ingresodato">
+                <label>Alineacion y Balanceo</label>
+                <input type="text" multiple v-model="alineacionybalanceo" list="alineacion">
+                    <datalist id="alineacion">
+                        <option value="No"></option>
+                        <option value="Con cambio de cubiertas."></option>
+                        <option value="Sin cambio de cubiertas."></option>
+                    </datalist>
+                    <!--
+                    <label for="alineacion">Alineacion y Balanceo</label>
+                        <select name="alineaciones" id="alineacion">
+                            <option value="No"></option>
+                            <option value="Con cambio de cubiertas."></option>
+                            <option value="Sin cambio de cubiertas."></option>
+                        </select>    
+                    <input type="text" v-model="alineacionybalanceo">-->
+            </div>
+            <div class="ingresodato">
+                <label>Cambio de Aceite y Filtro</label>
+                <input type="text" multiple v-model="cambiodeaceite" list="cambio">
+                    <datalist id="cambio">
+                        <option value="No"></option>
+                        <option value="Alto rendimiento para motor diesel"></option>
+                        <option value="Bajo rendimiento para motor diesel"></option>
+                        <option value="Alto rendimiento para motor naftero"></option>
+                        <option value="Bajo rendimiento para motor naftero"></option>
+                    </datalist>                
+            </div>
+            <div class="ingresodato">
+                <label>Lavado</label>
+                <input type="text" multiple v-model="lavado" list="lavado">
+                    <datalist id="lavado">
+                        <option value="no"></option>
+                        <option value="Lavado Basico"></option>
+                        <option value="Lavado Completo"></option>
+                        <option value="Lavado Premium"></option>
+                    </datalist>
+            </div>
+            <div class="ingresodato">
+                <label>Precio</label>
+                <input type="text" v-model="precio">
+                <button @click="postearDatos" class="btn btn-primary btn-lg">Ingresar</button>
+            </div>
+            
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-dark table-striped fixed-header">
+                <thead>
+                    <tr class="busqueda">
+                        <td>
+                            <label>Buscar por DNI:</label>
+                            <input type="text" v-model="buscadorDNI" @change="filtrar" @input="filtrar">
+                        </td>
+                        <td>
+                            <label>Buscar por Nombre:</label>
+                            <input type="text" v-model="buscadorNombre" @input="filtrar">
+                        </td>
+                        <td>
+                            <label>Buscar por Patente:</label>
+                            <input type="text" v-model="buscadorPatente" @input="filtrar">
+                        </td>
+                        <td>
+                            <label>Turnos Pasados</label>
+                            <input type="checkbox" v-model="pasados" @change="filtrar">
+                        </td>
+                        <td>
+                            <label>Turnos Futuros</label>
+                            <input type="checkbox" v-model="futuros" @change="filtrar">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre de Cliente</th>
+                        <th>DNI del Cliente</th>
+                        <th>Tipo de Cliente</th>
+                        <th>Patente</th>
+                        <th>Precio</th>
+                        <th>Fecha y Hora</th>
+                        <th>Alineacion y Balanceo</th>
+                        <th>Aceite y Filtro</th>
+                        <th>Lavado</th>
+                    </tr> 
+                </thead>
+
+                <tbody class="table-light">
+                    <tr v-for="turno in turnosFiltrados" v-bind:key="turno.id">
+                        <td>{{turno.id}}</td>
+                        <td>{{turno.cliente.nombre}}</td>
+                        <td>{{turno.cliente.dni}}</td>
+                        <td>{{turno.cliente.tipoCliente}}</td>
+                        <td>{{turno.patente}}</td>
+                        <td>{{turno.precio}}</td>
+                        <td>{{turno.fecha}}</td>
+                        <td>{{turno.servicio.alineacionybalanceo}}</td>
+                        <td>{{turno.servicio.aceiteyfiltro}}</td>
+                        <td>{{turno.servicio.lavado}}</td>
+                    </tr>
+
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="js/turnos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
