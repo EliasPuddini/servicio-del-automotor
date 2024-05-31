@@ -1,12 +1,18 @@
-Cosas a tener en cuenta del codigo:
-  El codigo permite la modificación y visualización de los datos de la empresa por consola.
-  Para probar los test, hay que comentar la etiqueta @Bean de la función init() en el archivo principal "ServicioDelAutomotorApplication.java".
- La página web se encuentra en el localhost:8080/clients o /turnos
+Descripción: 
+ Desarrollé un software de gestión para una "boutique del automotor" que ofrece servicios como lavado (básico, completo o premium), 
+alineación y balanceo (con o sin cambio de cubiertas) y cambio de aceite y filtros (básico o de alto rendimiento, para motores diesel o nafteros).
 
-Cosas a tener en cuenta de la base de datos:
-  El archivo de la base de datos se encuentra al principio, "Servicio_Automotor.sql".
-  Se uso Laragon para el uso y gestion de la base de datos.
-  El utilizado es usuario "root" y usa la contraseña "1234".
-  Para la configuración del la base de datos, solo hay que ejecutar el archivo como un archivo SQL, el cual viene con datos en su interior.
+Objetivos del Programa:
+- Generar una agenda de turnos con fecha, hora, identificación del vehículo, nombre del cliente y servicio contratado.
+- Incluir precios específicos para cada orden de trabajo según el servicio contratado.
+- Listar y guardar los servicios brindados en un historial.
+- Identificar a los clientes “premium” para otorgarles bonificaciones o servicios de regalo.
 
-Revisar la rama Full Stack para ver los datos en una pagina web.
+Tecnologías Utilizadas:
+ Java, Spring Boot, Spring MVC, Vue.js, SQL, Laravel, Maven, JUnit.
+
+Mi Rol: 
+ Desarrollo completo del programa, incluyendo la implementación de pruebas unitarias.
+
+Logros y Resultados: 
+ Implementé un sistema robusto de gestión de turnos y servicios, incluyendo una base de datos para el almacenamiento de información y pruebas unitarias que garantizan la calidad del software.
