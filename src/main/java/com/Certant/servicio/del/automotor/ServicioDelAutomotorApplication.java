@@ -13,24 +13,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class ServicioDelAutomotorApplication {
 
-	/*
-	@Autowired
-	ServicioRepository servicioRepository;
-	@Autowired
-	ClientRepository clientRepository;
-	@Autowired
-	TurnoRepository turnoRepository;*/
-
 	public static void main(String[] args){
 		SpringApplication.run(ServicioDelAutomotorApplication.class, args);
 
-	}
-
-	@Bean
-	public CommandLineRunner init(ServicioRepository servicioRepository, ClientRepository clientRepository, TurnoRepository turnoRepository){
-		return args -> {
-			com.Certant.servicio.del.automotor.utils.utils.menu(clientRepository,turnoRepository,servicioRepository);	//arrancar el menu
-		};
 	}
 
 }
