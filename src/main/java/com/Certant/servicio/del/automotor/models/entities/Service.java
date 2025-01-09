@@ -7,10 +7,11 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Model {
+public class Service {
     @Id
     private Long id;
     private String name;
     @ManyToOne
-    private Brand brand;
+    private ServiceType serviceType;
+    private double price;
 }

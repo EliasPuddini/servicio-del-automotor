@@ -7,10 +7,12 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Model {
+public class Bonus {
     @Id
     private Long id;
-    private String name;
+    private double bonus;
     @ManyToOne
-    private Brand brand;
+    private Service service;
+    private double percentaje;
+    private boolean isActive;
 }

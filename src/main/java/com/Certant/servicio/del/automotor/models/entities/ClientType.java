@@ -1,8 +1,12 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import lombok.Setter;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import lombok.Data;
 
-@Setter
+@Data
+@Entity
 public class ClientType {
+    @Column(unique = true)
     private String name;
 }

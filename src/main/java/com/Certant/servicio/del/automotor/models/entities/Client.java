@@ -1,9 +1,6 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,8 +13,11 @@ public class Client {
     @Id
     private Long id;
     private String name;
+    @OneToOne
+    @Column(unique = true)
     private Document document;
-    @OneToMany(mappedBy = "entity", cascade = CascadeType.ALL)
+    @OneToMany
     private List<Contact> contatList;
+    @OneToOne
     private ClientType clientType;
 }
