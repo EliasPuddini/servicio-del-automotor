@@ -4,9 +4,11 @@ import com.Certant.servicio.del.automotor.models.entities.Contact;
 import com.Certant.servicio.del.automotor.models.entities.Document;
 import com.Certant.servicio.del.automotor.models.entities.User;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) // JOINED para tablas separadas
 public class Person {
