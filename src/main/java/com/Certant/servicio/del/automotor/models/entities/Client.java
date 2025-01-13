@@ -20,4 +20,6 @@ public class Client {
     private List<Contact> contatList;
     @OneToOne
     private ClientType clientType;
+    @OneToOne
+    private User user;
 }
