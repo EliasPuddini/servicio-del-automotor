@@ -1,9 +1,6 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -15,6 +12,11 @@ public class History {
     @Id
     private Long id;
     private Date date;
-    @OneToMany(fetch  = FetchType.EAGER,mappedBy = "date")
-    private List<Order> realizedOrders;
+    @ManyToOne
+    private Order order;
+    @ManyToOne
+    private Mechanic mechanic;
+    @ManyToOne
+    private Status status;
+    private String observation;
 }
