@@ -1,7 +1,6 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
-import com.Certant.servicio.del.automotor.models.entities.Client;
-import com.Certant.servicio.del.automotor.models.entities.Contact;
+import com.Certant.servicio.del.automotor.models.entities.Person.Client;
 import lombok.Getter;
 
 import java.util.ArrayList;

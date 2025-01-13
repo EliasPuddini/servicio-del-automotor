@@ -1,15 +1,16 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
+import com.Certant.servicio.del.automotor.models.entities.Person.Mechanic;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
 public class History {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
     @ManyToOne

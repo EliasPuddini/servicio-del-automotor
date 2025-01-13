@@ -1,6 +1,6 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
-import com.Certant.servicio.del.automotor.models.entities.Mechanic;
+import com.Certant.servicio.del.automotor.models.entities.Person.Mechanic;
 import lombok.Getter;
 
 @Getter

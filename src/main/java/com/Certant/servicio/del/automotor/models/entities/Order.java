@@ -1,5 +1,6 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
+import com.Certant.servicio.del.automotor.models.entities.Person.Client;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
     private Time hour;
@@ -23,8 +25,4 @@ public class Order {
     private Double finalPrice;
     @ManyToMany
     private List<Bonus> bonus;
-
-    public void aplyBonus(){
-        //TODO
-    }
 }

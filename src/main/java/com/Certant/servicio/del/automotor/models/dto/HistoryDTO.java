@@ -1,14 +1,9 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
 import com.Certant.servicio.del.automotor.models.entities.History;
-import com.Certant.servicio.del.automotor.models.entities.Mechanic;
-import com.Certant.servicio.del.automotor.models.entities.Order;
-import com.Certant.servicio.del.automotor.models.entities.Status;
-import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 public class HistoryDTO {
