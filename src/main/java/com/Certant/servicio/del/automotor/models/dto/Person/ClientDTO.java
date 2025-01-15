@@ -16,6 +16,7 @@ public class ClientDTO extends PersonDTO{
     private ClientTypeDTO clientType;
 
     public ClientDTO(Client client){
+        super(client);
         this.name = client.getName();
         this.document = new DocumentDTO(client.getDocument());
         this.user = new UserDTO(client.getUser());

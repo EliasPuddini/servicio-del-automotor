@@ -12,6 +12,7 @@ public class MechanicDTO extends PersonDTO{
     private String availability;
 
     public MechanicDTO(Mechanic mechanic){
+        super(mechanic);
         this.availability = mechanic.getAvailability();
         this.name = mechanic.getName();
         this.document = new DocumentDTO(mechanic.getDocument());
