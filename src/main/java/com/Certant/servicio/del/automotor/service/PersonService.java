@@ -16,4 +16,5 @@ public interface PersonService {
     void save(Person person);
     List<MechanicDTO> getMechanics();
     List<PersonDTO> getAdmins();
+    void putPerson(Long id,Person person);
 }
