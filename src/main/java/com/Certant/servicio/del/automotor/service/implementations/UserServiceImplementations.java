@@ -40,9 +40,9 @@ public class UserServiceImplementations implements UserService {
     }
 
     @Override
-    public void deleteUser(String name) {
+    public void deleteUser(Long id) {
 
-        User user = userRepository.findAll().stream().filter(user1 -> Objects.equals(user1.getUserName(), name)).findFirst().orElse(null);
+        User user = userRepository.findAll().stream().filter(user1 -> Objects.equals(user1.getId(), id)).findFirst().orElse(null);
         assert user != null;
         userRepository.deleteById(user.getId());
     }
@@ -51,5 +51,16 @@ public class UserServiceImplementations implements UserService {
     public void saveUser(User user) {
 
         userRepository.save(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        User existingUser = userRepository.findById(user.getId()).orElse(null);
+        assert existingUser != null;
+        existingUser.setUserName(user.getUserName());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setIsAdmin(user.getIsAdmin());
+        existingUser.setIsMechanic(user.getIsMechanic());
+        userRepository.save(existingUser);
     }
 }
