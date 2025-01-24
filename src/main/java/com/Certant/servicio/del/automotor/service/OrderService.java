@@ -13,4 +13,5 @@ public interface OrderService {
     public OrderDTO getByID(Long id);
     public void deleteById(Long id);
     public void saveOrder(Order order);
+    public void updateOrder(Long id, Order order);
 }

@@ -5,6 +5,7 @@ import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,13 +55,13 @@ public class OrderController {
         }
     }
 
-    /*@PutMapping("/{userID}")
-    public ResponseEntity<?> updateUser(@PathVariable("userID") Long userID, @RequestBody @Validated User user) {
+    @PutMapping("/{userID}")
+    public ResponseEntity<?> updateUser(@PathVariable("userID") Long orderID, @RequestBody @Validated Order order) {
         try {
-            userService.updateUser(userID, user);
-            return ResponseEntity.status(HttpStatus.OK).body("User with ID: "+ userID+" updated successfully");
+            orderService.updateOrder(orderID,order);
+            return ResponseEntity.status(HttpStatus.OK).body("Order with ID: "+ orderID+" updated successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error updating user with ID: " + userID);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error updating order with ID: " + orderID);
         }
-    }*/
+    }
 }

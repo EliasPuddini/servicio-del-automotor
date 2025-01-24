@@ -51,4 +51,18 @@ public class OrderServiceImplementation implements OrderService {
     public void saveOrder(Order order) {
         orderRepository.save(order);
     }
+
+    @Override
+    public void updateOrder(Long id, Order order) {
+        Order order1 = orderRepository.findById(id).orElse(null);
+        assert order1 != null;
+        order1.setService(order.getService());
+        order1.setHour(order.getHour());
+        order1.setDate(order.getDate());
+        order1.setVehicle(order.getVehicle());
+        order1.setBonus(order.getBonus());
+        order1.setClient(order.getClient());
+        order1.setFinalPrice(order.getFinalPrice());
+        orderRepository.save(order1);
+    }
 }
