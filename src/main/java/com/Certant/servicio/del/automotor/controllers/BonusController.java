@@ -1,6 +1,7 @@
 package com.Certant.servicio.del.automotor.controllers;
 
 
+import com.Certant.servicio.del.automotor.models.dto.BonusDTO;
 import com.Certant.servicio.del.automotor.models.entities.Bonus;
 import com.Certant.servicio.del.automotor.service.BonusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/bonus")
@@ -17,22 +20,26 @@ public class BonusController {
     private BonusService bonusService;
 
     @GetMapping
-    public ResponseEntity<String> getAll(){
-        try{
-            bonusService.getAll();
-            return ResponseEntity.status(HttpStatus.OK).body("Bonus found successfully");
-        }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bonus not found");
+    public ResponseEntity<List<BonusDTO>> getAll(){
+        try {
+            List<BonusDTO> bonuses = bonusService.getAll();
+            return ResponseEntity.status(HttpStatus.OK).body(bonuses);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
     @GetMapping("/{bonusID}")
-    public ResponseEntity<String> getByID(@PathVariable("bonusID") Long bonusID){
-        try{
-            bonusService.getByID(bonusID);
-            return ResponseEntity.status(HttpStatus.OK).body("Bonus found successfully");
-        }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bonus not found");
+    public ResponseEntity<BonusDTO> getByID(@PathVariable("bonusID") Long bonusID){
+        try {
+            BonusDTO bonus = bonusService.getByID(bonusID);
+            if (bonus != null) {
+                return ResponseEntity.status(HttpStatus.OK).body(bonus);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

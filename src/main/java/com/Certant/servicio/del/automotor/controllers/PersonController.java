@@ -1,11 +1,15 @@
 package com.Certant.servicio.del.automotor.controllers;
 
+import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
+import com.Certant.servicio.del.automotor.models.dto.Person.PersonDTO;
 import com.Certant.servicio.del.automotor.models.entities.Person.Person;
 import com.Certant.servicio.del.automotor.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/person")
@@ -15,17 +19,22 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping()
-    public void getAll(){
-        personService.getAll();
+    public ResponseEntity<List<PersonDTO>> getAll(){
+        try{
+            List<PersonDTO> personDTO = personService.getAll();
+            return ResponseEntity.status(HttpStatus.OK).body(personDTO);
+        } catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @GetMapping("/{personID}")
-    public ResponseEntity<String> getByID(@PathVariable("personID") Long id){
+    public ResponseEntity<PersonDTO> getByID(@PathVariable("personID") Long id){
         try{
-            personService.getById(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Person found successfully");
+            PersonDTO personDTO = personService.getById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(personDTO);
         } catch (Exception exception){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Person not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

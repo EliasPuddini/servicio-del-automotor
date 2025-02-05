@@ -1,5 +1,6 @@
 package com.Certant.servicio.del.automotor.controllers;
 
+import com.Certant.servicio.del.automotor.models.dto.UserDTO;
 import com.Certant.servicio.del.automotor.models.entities.User;
 import com.Certant.servicio.del.automotor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/user")
@@ -16,22 +19,22 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<String> getAll(){
+    public ResponseEntity<List<UserDTO>> getAll(){
         try{
-            userService.getAll();
-            return ResponseEntity.status(HttpStatus.OK).body("Users found successfully");
+            List<UserDTO> users = userService.getAll();
+            return ResponseEntity.status(HttpStatus.OK).body(users);
         }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Users not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
     @GetMapping("/{userID}")
-    public ResponseEntity<String> getUserByID(@PathVariable("userID") Long userID){
+    public ResponseEntity<UserDTO> getUserByID(@PathVariable("userID") Long userID){
 
         try{
-            userService.getById(userID);
-            return ResponseEntity.status(HttpStatus.OK).body("User found successfully");
+            UserDTO userDTO = userService.getById(userID);
+            return ResponseEntity.status(HttpStatus.OK).body(userDTO);
         }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

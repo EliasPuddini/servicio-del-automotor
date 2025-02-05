@@ -5,12 +5,14 @@ import com.Certant.servicio.del.automotor.models.entities.Order;
 import com.Certant.servicio.del.automotor.repositories.OrderRepository;
 import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+@Service
 public class OrderServiceImplementation implements OrderService {
 
     @Autowired

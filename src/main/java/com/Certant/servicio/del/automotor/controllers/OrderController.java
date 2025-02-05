@@ -1,5 +1,6 @@
 package com.Certant.servicio.del.automotor.controllers;
 
+import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
 import com.Certant.servicio.del.automotor.models.entities.Order;
 import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/order")
@@ -16,22 +19,22 @@ public class OrderController {
     private OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<String> getAll(){
+    public ResponseEntity<List<OrderDTO>> getAll(){
         try{
-            orderService.getOrders();
-            return ResponseEntity.status(HttpStatus.OK).body("Orders found successfully");
+            List<OrderDTO> orders = orderService.getOrders();
+            return ResponseEntity.status(HttpStatus.OK).body(orders);
         }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Orders not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
     @GetMapping("/{orderID}")
-    public ResponseEntity<String> getByID(@PathVariable("orderID") Long id){
+    public ResponseEntity<OrderDTO> getByID(@PathVariable("orderID") Long id){
         try{
-            orderService.getByID(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Order found successfully");
+            OrderDTO order = orderService.getByID(id);
+            return ResponseEntity.status(HttpStatus.OK).body(order);
         }catch(Exception ignored){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 

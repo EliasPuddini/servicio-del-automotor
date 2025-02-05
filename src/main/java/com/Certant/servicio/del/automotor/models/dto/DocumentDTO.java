@@ -2,7 +2,9 @@ package com.Certant.servicio.del.automotor.models.dto;
 
 import com.Certant.servicio.del.automotor.models.entities.Document;
 import com.Certant.servicio.del.automotor.models.enums.DocumentType;
+import lombok.Getter;
 
+@Getter
 public class DocumentDTO {
     private DocumentType documentType;
     private String value;

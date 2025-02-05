@@ -10,7 +10,4 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne
-    private ServiceType serviceType;
-    private double price;
 }
