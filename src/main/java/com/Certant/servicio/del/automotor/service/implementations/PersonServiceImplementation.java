@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonServiceImplementation implements PersonService {
@@ -33,17 +34,17 @@ public class PersonServiceImplementation implements PersonService {
     @Override
     public List<ClientDTO> getClients(){
         List<ClientDTO> clientDTOS = new ArrayList<>();
-        personRepository.findAll().stream().filter(person -> person.getUser().getIsMechanic()&&person.getUser().getIsAdmin()).toList()
+        personRepository.findAll().stream().filter(person -> person.getUser() != null&&!person.getUser().getIsMechanic()&&!person.getUser().getIsAdmin()).toList()
                 .forEach(client ->clientDTOS.add(new ClientDTO((Client) client)));
         return clientDTOS;
     }
+
     @Override
     public List<MechanicDTO> getMechanics() {
-
-        List<MechanicDTO> mechanicDTOS = new ArrayList<>();
-        personRepository.findAll().stream().filter(person -> person.getUser().getIsMechanic()).toList()
-                .forEach(mechanic ->mechanicDTOS.add(new MechanicDTO((Mechanic) mechanic)));
-        return mechanicDTOS;
+        return personRepository.findAll().stream()
+                .filter(person -> person.getUser() != null && Boolean.TRUE.equals(person.getUser().getIsMechanic()))
+                .map(person -> new MechanicDTO((Mechanic) person))
+                .collect(Collectors.toList());
     }
 
     @Override

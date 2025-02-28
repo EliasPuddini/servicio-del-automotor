@@ -1,6 +1,8 @@
 package com.Certant.servicio.del.automotor.controllers;
 
 import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
+import com.Certant.servicio.del.automotor.models.dto.Person.ClientDTO;
+import com.Certant.servicio.del.automotor.models.dto.Person.MechanicDTO;
 import com.Certant.servicio.del.automotor.models.dto.Person.PersonDTO;
 import com.Certant.servicio.del.automotor.models.entities.Person.Person;
 import com.Certant.servicio.del.automotor.service.PersonService;
@@ -68,4 +70,23 @@ public class PersonController {
         }
     }
 
+    @GetMapping("/clients")
+    public ResponseEntity<List<ClientDTO>> getClients(){
+        try{
+            List<ClientDTO> clientsDTO = personService.getClients();
+            return ResponseEntity.status(HttpStatus.OK).body(clientsDTO);
+        } catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+    }
+    /*
+    @GetMapping("/mechanics")
+    public ResponseEntity<List<MechanicDTO>> getMechanics(){
+        try{
+            List<MechanicDTO> mechanicDTOS = personService.getMechanics();
+            return ResponseEntity.status(HttpStatus.OK).body(mechanicDTOS);
+        } catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+    }*/
 }
