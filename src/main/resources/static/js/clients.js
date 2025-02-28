@@ -18,7 +18,7 @@ const app = createApp({
   methods: {
     getData() {
       axios
-        .get("http://localhost:8080/api/clients")
+        .get("http://localhost:8080/api/persons/clients")
         .then(response => {
           this.clientes = response.data;
           console.log(this.clientes);
