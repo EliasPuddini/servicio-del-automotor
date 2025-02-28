@@ -13,11 +13,11 @@
     
     <style>
         body {
-            background-color: #121212; /* Fondo oscuro */
-            color: #f8f9fa; /* Texto claro */
+            background-color: #121212;
+            color: #f8f9fa;
         }
         .table thead {
-            background-color: #007bff; /* Azul Bootstrap */
+            background-color: #007bff;
             color: white;
         }
         .btn-floating {
@@ -67,38 +67,29 @@
             <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
-                        <th colspan="2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <label class="me-2">Buscar por DNI:</label>
-                                <input type="text" v-model="buscadorDNI" @input="filtrar" class="form-control w-50">
-                            </div>
-                        </th>
-                        <th colspan="3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <label class="me-2">Buscar por Nombre:</label>
-                                <input type="text" v-model="buscadorNombre" @input="filtrar" class="form-control w-50">
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>DNI</th>
-                        <th>Tipo de Cliente</th>
+                        <th>Tipo de Documento</th>
+                        <th>Documento</th>
+                        <th>Usuario</th>
                     </tr> 
                 </thead>
                 <tbody class="table-primary text-dark">
-                    <tr v-for="cliente in clientesFiltrados" :key="cliente.id">
+                    <tr v-for="cliente in clientes" :key="cliente.id">
                         <td>{{cliente.id}}</td>
-                        <td>{{cliente.nombre}}</td>
-                        <td>{{cliente.dni}}</td>
-                        <td>{{cliente.tipoCliente}}</td>
-                        <td>{{cliente.serviciosPrevios}}</td>
+                        <td>{{cliente.name}}</td>
+                        <td>{{cliente.document.documentType}}</td>
+                        <td>{{cliente.document.value}}</td>
+                        <td>{{cliente.user.username}}</td>
+                        <td>
+                            <ul>
+                                <li v-for="contact in cliente.contactList" :key="contact.id">{{ contact.info }}</li>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
 
     <!-- Botón flotante para agregar cliente -->
@@ -116,11 +107,27 @@
                     <form @submit.prevent="postearDatos">
                         <div class="mb-3">
                             <label class="form-label">Nombre</label>
-                            <input type="text" v-model="nombre" class="form-control" required>
+                            <input type="text" v-model="nuevoCliente.name" class="form-control" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">DNI</label>
-                            <input type="text" v-model="dni" class="form-control" required>
+                            <label class="form-label">Tipo de Documento</label>
+                            <select v-model="nuevoCliente.document.documentType" class="form-control" required>
+                                <option value="DNI">DNI</option>
+                                <option value="CUIT">CUIT</option>
+                                <option value="CUIL">CUIL</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Número de Documento</label>
+                            <input type="text" v-model="nuevoCliente.document.value" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+                            <input type="text" v-model="nuevoCliente.user.username" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" v-model="nuevoCliente.user.password" class="form-control" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Ingresar</button>
                     </form>
@@ -132,9 +139,33 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="js/clients.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    clientes: [],
+                    nuevoCliente: {
+                        name: '',
+                        document: { documentType: '', value: '' },
+                        user: { username: '', password: '', isAdmin: false, isMechanic: false },
+                        contactList: []
+                    },
+                    contactos: ''
+                };
+            },
+            methods: {
+                postearDatos() {
+                    this.nuevoCliente.contactList = this.contactos.split(',').map(c => ({ info: c.trim() }));
+                    axios.post('/api/person/clients', this.nuevoCliente)
+                        .then(response => {
+                            this.clientes.push(response.data);
+                            this.contactos = '';
+                        })
+                        .catch(error => console.error(error));
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
 </body>
-
 </html>
