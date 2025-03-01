@@ -1,3 +1,46 @@
+const app = Vue.createApp({
+  data() {
+      return {
+          clientes: [],
+          nuevoCliente: {
+              name: '',
+              document: { documentType: '', value: '' },
+              user: { username: '', password: '', isAdmin: false, isMechanic: false },
+              contactList: []
+          }
+      };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+      getData() {
+        axios
+          .get("http://localhost:8080/api/persons/clients")
+          .then(response => {
+            this.clientes = response.data;
+            console.log(this.clientes);
+            this.clientesFiltrados = this.clientes;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      postearDatos() {
+          this.nuevoCliente.contactList = this.contactos.split(',').map(c => ({ info: c.trim() }));
+          axios.post('/api/person/clients', this.nuevoCliente)
+              .then(response => {
+                  this.clientes.push(response.data);
+                  this.contactos = '';
+              })
+              .catch(error => console.error(error));
+      }
+  }
+});
+app.mount('#app');
+
+
+/*
 const { createApp } = Vue;
 
 const app = createApp({
@@ -72,4 +115,4 @@ const app = createApp({
         
     }
   }
-}).mount("#app");
+}).mount("#app");*/

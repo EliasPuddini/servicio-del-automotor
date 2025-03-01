@@ -1,4 +1,32 @@
-const { createApp } = Vue;
+const app = Vue.createApp({
+  data() {
+      return {
+          turnos: []
+      };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+      getData() {
+        axios
+          .get("http://localhost:8080/api/order")
+          .then(response => {
+            this.turnos = response.data;
+            console.log(this.turnos);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      },
+      formatFecha(fecha) {
+          return new Date(fecha).toLocaleDateString("es-AR");
+      }
+  }
+});
+app.mount('#app');
+
+/*const { createApp } = Vue;
 
 const app = createApp({
   data() {
@@ -28,7 +56,7 @@ const app = createApp({
   methods: {
     getData() {
       axios
-        .get("http://localhost:8080/api/turnos")
+        .get("http://localhost:8080/api/order")
         .then(response => {
           this.turnos = response.data;
           this.turnosFiltrados = this.turnos;
@@ -171,4 +199,4 @@ const app = createApp({
     }
 
   }
-}).mount("#app");
+}).mount("#app");*/
