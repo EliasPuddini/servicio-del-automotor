@@ -6,8 +6,10 @@ const app = Vue.createApp({
               name: '',
               document: { documentType: '', value: '' },
               user: { username: '', password: '', isAdmin: false, isMechanic: false },
-              contactList: []
-          }
+              contactList: [],
+              
+          },
+          mostrarModal: false
       };
   },
   created() {
@@ -20,20 +22,25 @@ const app = Vue.createApp({
           .then(response => {
             this.clientes = response.data;
             console.log(this.clientes);
-            this.clientesFiltrados = this.clientes;
           })
           .catch(error => {
             console.log(error);
           });
       },
       postearDatos() {
-          this.nuevoCliente.contactList = this.contactos.split(',').map(c => ({ info: c.trim() }));
+          //this.nuevoCliente.contactList = this.contactos.split(',').map(c => ({ info: c.trim() }));
           axios.post('/api/person/clients', this.nuevoCliente)
               .then(response => {
                   this.clientes.push(response.data);
                   this.contactos = '';
               })
               .catch(error => console.error(error));
+      },
+      abrirModal() {
+          this.mostrarModal = true;
+      },
+      cerrarModal() {
+          this.mostrarModal = false;
       }
   }
 });

@@ -85,50 +85,52 @@
                 </tbody>
             </table>
         </div>
-    </div>
+            
+        <!-- Botón flotante para agregar cliente -->
+        <button class="btn btn-primary btn-floating" @click="abrirModal">+</button>
 
-    <!-- Botón flotante para agregar cliente -->
-    <button class="btn btn-primary btn-floating" data-bs-toggle="modal" data-bs-target="#agregarClienteModal">+</button>
-
-    <!-- Modal para agregar cliente -->
-    <div class="modal fade" id="agregarClienteModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content bg-dark text-light">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Ingresar un Cliente</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form @submit.prevent="postearDatos">
-                        <div class="mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" v-model="nuevoCliente.name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Tipo de Documento</label>
-                            <select v-model="nuevoCliente.document.documentType" class="form-control" required>
-                                <option value="DNI">DNI</option>
-                                <option value="CUIT">CUIT</option>
-                                <option value="CUIL">CUIL</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Número de Documento</label>
-                            <input type="text" v-model="nuevoCliente.document.value" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Usuario</label>
-                            <input type="text" v-model="nuevoCliente.user.username" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" v-model="nuevoCliente.user.password" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-                    </form>
+        <!-- Modal para agregar cliente -->
+        <div v-if="mostrarModal" class="modal fade show d-block" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content bg-dark text-light">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ingresar un Cliente</h5>
+                        <button type="button" class="btn-close btn-close-white" @click="cerrarModal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="postearDatos">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" v-model="nuevoCliente.name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de Documento</label>
+                                <select v-model="nuevoCliente.document.documentType" class="form-control" required>
+                                    <option value="DNI">DNI</option>
+                                    <option value="CUIT">CUIT</option>
+                                    <option value="CUIL">CUIL</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Número de Documento</label>
+                                <input type="text" v-model="nuevoCliente.document.value" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Usuario</label>
+                                <input type="text" v-model="nuevoCliente.user.username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" v-model="nuevoCliente.user.password" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100" @onClick>Ingresar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+
     </div>
 
     <!-- Scripts -->
