@@ -1,6 +1,5 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import com.Certant.servicio.del.automotor.models.entities.Person.Mechanic;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -8,6 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@Table(name = "History")
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

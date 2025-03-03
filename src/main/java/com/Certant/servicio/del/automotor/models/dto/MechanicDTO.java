@@ -1,26 +1,28 @@
-package com.Certant.servicio.del.automotor.models.dto.Person;
+package com.Certant.servicio.del.automotor.models.dto;
 
-import com.Certant.servicio.del.automotor.models.dto.ClientTypeDTO;
 import com.Certant.servicio.del.automotor.models.dto.ContactDTO;
 import com.Certant.servicio.del.automotor.models.dto.DocumentDTO;
 import com.Certant.servicio.del.automotor.models.dto.UserDTO;
-import com.Certant.servicio.del.automotor.models.entities.Person.Mechanic;
+import com.Certant.servicio.del.automotor.models.entities.Mechanic;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
-public class MechanicDTO extends PersonDTO{
+public class MechanicDTO{
+    private String name;
+    private DocumentDTO documentDTO;
+    private List<ContactDTO> contacts;
     private String availability;
 
     public MechanicDTO(Mechanic mechanic){
-        super(mechanic);
         this.availability = mechanic.getAvailability();
         this.name = mechanic.getName();
-        this.document = new DocumentDTO(mechanic.getDocument());
-        this.user = new UserDTO(mechanic.getUser());
+        this.documentDTO = new DocumentDTO(mechanic.getDocument());
 
         mechanic.getContactList().forEach(contact -> {
             ContactDTO contactDTO = new ContactDTO(contact);
-            contactList.add(contactDTO);
+            contacts.add(contactDTO);
         });
     }
 }

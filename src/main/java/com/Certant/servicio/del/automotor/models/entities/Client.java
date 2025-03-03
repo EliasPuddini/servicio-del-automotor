@@ -1,17 +1,20 @@
-package com.Certant.servicio.del.automotor.models.entities.Person;
+package com.Certant.servicio.del.automotor.models.entities;
 
+import com.Certant.servicio.del.automotor.models.entities.ClientType;
 import com.Certant.servicio.del.automotor.models.entities.Contact;
 import com.Certant.servicio.del.automotor.models.entities.Document;
 import com.Certant.servicio.del.automotor.models.entities.User;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED) // JOINED para tablas separadas
-public class Person {
+@Table(name = "Clients")
+public class Client{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +25,11 @@ public class Person {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contact> contactList;
+    @OneToMany
+    private List<Contact> contacts;
+    @OneToMany
+    private List<Vehicle> vehicles;
+    @ManyToOne
+    @JoinColumn(name = "clientType_id")
+    private ClientType clientType;
 }

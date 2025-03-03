@@ -1,6 +1,5 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
-import com.Certant.servicio.del.automotor.models.dto.Person.ClientDTO;
 import com.Certant.servicio.del.automotor.models.entities.Order;
 import lombok.Getter;
 

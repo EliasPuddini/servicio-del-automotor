@@ -1,6 +1,5 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import com.Certant.servicio.del.automotor.models.entities.Person.Client;
 import jakarta.persistence.*;
 import lombok.Data;
 

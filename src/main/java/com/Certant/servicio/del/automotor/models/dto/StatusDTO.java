@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Getter
 public class StatusDTO {
-    private String status;
+    private String name;
 
     public StatusDTO(Status status){
-        this.status = status.getStatus();
+        this.name = status.getName();
     }
 }

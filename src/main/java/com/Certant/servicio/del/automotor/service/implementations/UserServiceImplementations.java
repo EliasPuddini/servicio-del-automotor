@@ -1,9 +1,9 @@
 package com.Certant.servicio.del.automotor.service.implementations;
 
 import com.Certant.servicio.del.automotor.models.dto.UserDTO;
+import com.Certant.servicio.del.automotor.models.entities.Client;
 import com.Certant.servicio.del.automotor.models.entities.User;
 import com.Certant.servicio.del.automotor.repositories.UserRepository;
-import com.Certant.servicio.del.automotor.repositories.PersonRepository;
 import com.Certant.servicio.del.automotor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,7 @@ public class UserServiceImplementations implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PersonRepository personRepository;
+
 
     @Override
     public List<UserDTO> getAll() {

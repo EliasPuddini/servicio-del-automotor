@@ -1,12 +1,11 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import com.Certant.servicio.del.automotor.models.entities.Person.Client;
-import com.Certant.servicio.del.automotor.models.entities.Person.Person;
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "Vehicles")
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +15,6 @@ public class Vehicle {
     private double kilometres;
     @ManyToOne
     private VehicleType vehicleType;
-    @ManyToOne
-    private Person owner;
     @ManyToOne
     private Model model;
 }
