@@ -1,7 +1,8 @@
 const app = Vue.createApp({
   data() {
       return {
-          turnos: []
+          turnos: [],
+          mostrarModal: false
       };
   },
   created() {
@@ -21,6 +22,12 @@ const app = Vue.createApp({
       },
       formatFecha(fecha) {
           return new Date(fecha).toLocaleDateString("es-AR");
+      },
+      abrirModal() {
+          this.mostrarModal = true;
+      },
+      cerrarModal() {
+          this.mostrarModal = false;
       }
   }
 });

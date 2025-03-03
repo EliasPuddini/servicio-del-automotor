@@ -79,7 +79,7 @@ public class PersonController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
     }
-    /*
+
     @GetMapping("/mechanics")
     public ResponseEntity<List<MechanicDTO>> getMechanics(){
         try{
@@ -88,5 +88,5 @@ public class PersonController {
         } catch (Exception exception){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }
-    }*/
+    }
 }

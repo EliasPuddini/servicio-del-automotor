@@ -28,8 +28,7 @@ const app = Vue.createApp({
           });
       },
       postearDatos() {
-          //this.nuevoCliente.contactList = this.contactos.split(',').map(c => ({ info: c.trim() }));
-          axios.post('/api/person/clients', this.nuevoCliente)
+          axios.post('/api/persons', this.nuevoCliente)
               .then(response => {
                   this.clientes.push(response.data);
                   this.contactos = '';
