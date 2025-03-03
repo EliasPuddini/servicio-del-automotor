@@ -4,7 +4,11 @@ import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
 import com.Certant.servicio.del.automotor.models.dto.Person.ClientDTO;
 import com.Certant.servicio.del.automotor.models.dto.Person.MechanicDTO;
 import com.Certant.servicio.del.automotor.models.dto.Person.PersonDTO;
+import com.Certant.servicio.del.automotor.models.entities.Person.Client;
 import com.Certant.servicio.del.automotor.models.entities.Person.Person;
+import com.Certant.servicio.del.automotor.repositories.ClientRepository;
+import com.Certant.servicio.del.automotor.repositories.DocumentRepository;
+import com.Certant.servicio.del.automotor.repositories.UserRepository;
 import com.Certant.servicio.del.automotor.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,12 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private DocumentRepository documentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping()
     public ResponseEntity<List<PersonDTO>> getAll(){
@@ -44,6 +54,17 @@ public class PersonController {
     public ResponseEntity<String> savePerson(@RequestBody Person person){
         try{
             personService.save(person);
+            return ResponseEntity.status(HttpStatus.OK).body("Person saved successfully");
+        } catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Person not saved");
+        }
+    }
+    @PostMapping("/clients")
+    public ResponseEntity<String> saveClient(@RequestBody Client client){
+        try{
+            documentRepository.save(client.getDocument());
+            userRepository.save(client.getUser());
+            clientRepository.save(client);
             return ResponseEntity.status(HttpStatus.OK).body("Person saved successfully");
         } catch (Exception exception){
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Person not saved");

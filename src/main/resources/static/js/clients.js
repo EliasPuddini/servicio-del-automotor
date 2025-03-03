@@ -5,9 +5,8 @@ const app = Vue.createApp({
           nuevoCliente: {
               name: '',
               document: { documentType: '', value: '' },
-              user: { username: '', password: '', isAdmin: false, isMechanic: false },
-              contactList: [],
-              
+              user: { userName: '', password: '', isAdmin: false, isMechanic: false },
+              clientType: {name: 'Básico'}
           },
           mostrarModal: false
       };
@@ -28,7 +27,7 @@ const app = Vue.createApp({
           });
       },
       postearDatos() {
-          axios.post('/api/persons', this.nuevoCliente)
+          axios.post('/api/persons/clients', this.nuevoCliente)
               .then(response => {
                   this.clientes.push(response.data);
                   this.contactos = '';
