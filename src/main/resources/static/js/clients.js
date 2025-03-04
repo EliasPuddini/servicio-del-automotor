@@ -17,7 +17,7 @@ const app = Vue.createApp({
   methods: {
       getData() {
         axios
-          .get("http://localhost:8080/api/persons/clients")
+          .get("http://localhost:8080/api/clients")
           .then(response => {
             this.clientes = response.data;
             console.log(this.clientes);
@@ -27,7 +27,7 @@ const app = Vue.createApp({
           });
       },
       postearDatos() {
-          axios.post('/api/persons/clients', this.nuevoCliente)
+          axios.post('/api/clients', this.nuevoCliente)
               .then(response => {
                   this.clientes.push(response.data);
                   this.contactos = '';
