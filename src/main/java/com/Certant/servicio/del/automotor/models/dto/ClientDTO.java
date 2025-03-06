@@ -10,7 +10,7 @@ import java.util.List;
 public class ClientDTO{
 
     private String name;
-    private DocumentDTO documentDTO;
+    private DocumentDTO document;
     private ClientTypeDTO clientType;
     private List<ContactDTO> contacts;
     private List<VehicleDTO> vehicles;
@@ -18,7 +18,7 @@ public class ClientDTO{
 
     public ClientDTO(Client client){
         this.name = client.getName();
-        this.documentDTO = new DocumentDTO(client.getDocument());
+        this.document = new DocumentDTO(client.getDocument());
         this.clientType = new ClientTypeDTO(client.getClientType());
 
         client.getContacts().forEach(contact -> {

@@ -3,6 +3,8 @@ package com.Certant.servicio.del.automotor.service.implementations;
 import com.Certant.servicio.del.automotor.models.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.models.entities.Client;
 import com.Certant.servicio.del.automotor.repositories.ClientRepository;
+import com.Certant.servicio.del.automotor.repositories.DocumentRepository;
+import com.Certant.servicio.del.automotor.repositories.UserRepository;
 import com.Certant.servicio.del.automotor.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,10 @@ public class ClientServiceImplementation implements ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
+    @Autowired
+    private DocumentRepository documentRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<ClientDTO> getAll() {
@@ -39,6 +45,15 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public void save(Client client) {
-        clientRepository.save(client);
+        try{
+            documentRepository.save(client.getDocument());
+            userRepository.save(client.getUser());
+            clientRepository.save(client);
+
+        }catch(Exception e){
+            documentRepository.delete(client.getDocument());
+            userRepository.delete(client.getUser());
+        }
+
     }
 }

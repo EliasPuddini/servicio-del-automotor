@@ -71,20 +71,25 @@
                         <th>Nombre</th>
                         <th>Tipo de Documento</th>
                         <th>Documento</th>
-                        <th>Usuario</th>
                         <th>Tipo Usuario</th>
                     </tr> 
                 </thead>
                 <tbody class="table-primary text-dark">
-                    <tr v-for="cliente in clientes" :key="cliente.id">
-                        <td>{{cliente.name}}</td>
-                        <td>{{cliente.document.documentType}}</td>
-                        <td>{{cliente.document.value}}</td>
-                        <td>{{cliente.user.name}}</td>
-                        <td>{{cliente.clientType.name}}</td>
-                    </tr>
+                    <div v-if="clientes.length > 0">
+                        <tr v-for="cliente in clientes" :key="cliente.id">
+                            <td>{{cliente.name}}</td>
+                            <td>{{cliente.document.documentType}}</td>
+                            <td>{{cliente.document.value}} </td>
+                            <td>{{cliente.clientType.name}}</td>
+                        </tr>
+                    </div>
+                    <div v-else>
+                        <p class="text-center text-light">Cargando clientes...</p>
+                    </div>
                 </tbody>
+                
             </table>
+            
         </div>
             
         <!-- Botón flotante para agregar cliente -->
