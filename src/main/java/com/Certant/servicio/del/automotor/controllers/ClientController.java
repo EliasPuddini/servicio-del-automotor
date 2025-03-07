@@ -47,11 +47,12 @@ public class ClientController {
 
     @PostMapping()
     public ResponseEntity<String> postClient(@RequestBody Client client){
+
         try{
             clientService.save(client);
-            return ResponseEntity.status(HttpStatus.OK).body(null);
+            return ResponseEntity.status(HttpStatus.OK).body(" Cliente Guardado con exito. ");
         } catch (Exception exception){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
         }
     }
 

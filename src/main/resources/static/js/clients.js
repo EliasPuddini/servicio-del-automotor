@@ -6,7 +6,7 @@ const app = Vue.createApp({
               name: '',
               document: { documentType: '', value: '' },
               user: { userName: '', password: '', isAdmin: false, isMechanic: false },
-              clientType: {name: 'Básico'},
+              clientType: {name: 'Basico'},
               vehicles:null,
               contacts:null
           },

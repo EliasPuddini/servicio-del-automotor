@@ -2,7 +2,9 @@ package com.Certant.servicio.del.automotor.service.implementations;
 
 import com.Certant.servicio.del.automotor.models.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.models.entities.Client;
+import com.Certant.servicio.del.automotor.models.entities.ClientType;
 import com.Certant.servicio.del.automotor.repositories.ClientRepository;
+import com.Certant.servicio.del.automotor.repositories.ClientTypeRepository;
 import com.Certant.servicio.del.automotor.repositories.DocumentRepository;
 import com.Certant.servicio.del.automotor.repositories.UserRepository;
 import com.Certant.servicio.del.automotor.service.ClientService;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class ClientServiceImplementation implements ClientService {
@@ -22,6 +25,8 @@ public class ClientServiceImplementation implements ClientService {
     private DocumentRepository documentRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ClientTypeRepository clientTypeRepository;
 
     @Override
     public List<ClientDTO> getAll() {
@@ -48,8 +53,9 @@ public class ClientServiceImplementation implements ClientService {
         try{
             documentRepository.save(client.getDocument());
             userRepository.save(client.getUser());
+            ClientType clientType = clientTypeRepository.findAll().stream().filter(Type -> Objects.equals(Type.getName(), "Basico")).findFirst().orElse(null);
+            client.setClientType(clientType);
             clientRepository.save(client);
-
         }catch(Exception e){
             documentRepository.delete(client.getDocument());
             userRepository.delete(client.getUser());

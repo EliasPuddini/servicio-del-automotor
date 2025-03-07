@@ -22,7 +22,7 @@ public class Client{
     @OneToOne
     @JoinColumn(name = "document_id", unique = true)
     private Document document;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany
