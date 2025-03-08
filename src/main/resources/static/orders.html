@@ -28,6 +28,10 @@
             justify-content: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
         }
+        .modal-content {
+            background-color: #222;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -83,52 +87,56 @@
                 </tbody>
             </table>
         </div>
-        <!-- Botón flotante para agregar cliente -->
+        
+        <!-- Botón flotante para abrir el modal -->
         <button class="btn btn-primary btn-floating" @click="abrirModal">+</button>
 
-        <!-- Modal para agregar cliente -->
-        <div v-if="mostrarModal" class="modal fade show d-block" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content bg-dark text-light">
+        <!-- Modal -->
+        <div class="modal fade" :class="{'show d-block': mostrarModal}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ingresar un Cliente</h5>
-                        <button type="button" class="btn-close btn-close-white" @click="cerrarModal"></button>
+                        <h5 class="modal-title">Nuevo Turno</h5>
+                        <button type="button" class="btn-close" @click="cerrarModal"></button>
                     </div>
                     <div class="modal-body">
-                        <form @submit.prevent="postearDatos">
+                        <form>
                             <div class="mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input type="text" v-model="nuevoCliente.name" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tipo de Documento</label>
-                                <select v-model="nuevoCliente.document.documentType" class="form-control" required>
-                                    <option value="DNI">DNI</option>
-                                    <option value="CUIT">CUIT</option>
-                                    <option value="CUIL">CUIL</option>
+                                <label class="form-label">Cliente</label>
+                                <select class="form-control" v-model="order.client.id" @change="filtrarVehiculos">
+                                    <option v-for="cliente in clientes" :key="cliente.id" :value="cliente.id">{{ cliente.name }}</option>
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Número de Documento</label>
-                                <input type="text" v-model="nuevoCliente.document.value" class="form-control" required>
+                                <label class="form-label">Vehículo</label>
+                                <select class="form-control" v-model="order.vehicle.carPatent">
+                                    <option v-for="vehiculo in vehiculosFiltrados" :key="vehiculo.carPatent" :value="vehiculo.carPatent">{{ vehiculo.carPatent }}</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Usuario</label>
-                                <input type="text" v-model="nuevoCliente.user.username" class="form-control" required>
+                                <label class="form-label">Servicio</label>
+                                <select class="form-control" v-model="order.service.name">
+                                    <option v-for="servicio in servicios" :key="servicio.id" :value="servicio.name">{{ servicio.name }}</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Password</label>
-                                <input type="password" v-model="nuevoCliente.user.password" class="form-control" required>
+                                <label class="form-label">Fecha</label>
+                                <input type="date" class="form-control" v-model="order.date">
                             </div>
-                            <button type="submit" class="btn btn-primary w-100" @onClick>Ingresar</button>
+                            <div class="mb-3">
+                                <label class="form-label">Hora</label>
+                                <input type="time" class="form-control" v-model="order.hour">
+                            </div>
                         </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" @click="cerrarModal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" @click="postearOrden">Guardar</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="js/orders.js"></script>

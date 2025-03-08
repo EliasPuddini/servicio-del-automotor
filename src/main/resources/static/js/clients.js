@@ -28,8 +28,9 @@ const app = Vue.createApp({
       postearDatos() {
           axios.post('/api/clients', this.nuevoCliente)
               .then(response => {
-                  this.clientes.push(response.data);
-                  this.contactos = '';
+                if (response.status === 200) {
+                    location.reload();
+                }
               })
               .catch(error => console.error(error));
       },
