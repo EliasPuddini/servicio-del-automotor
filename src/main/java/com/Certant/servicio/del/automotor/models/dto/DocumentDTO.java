@@ -1,7 +1,7 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
 import com.Certant.servicio.del.automotor.models.entities.Document;
-import com.Certant.servicio.del.automotor.models.enums.DocumentType;
+import com.Certant.servicio.del.automotor.models.entities.DocumentType;
 import lombok.Getter;
 
 @Getter

@@ -1,7 +1,7 @@
 package com.Certant.servicio.del.automotor.service.implementations;
 
 import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
-import com.Certant.servicio.del.automotor.models.entities.Order;
+import com.Certant.servicio.del.automotor.models.entities.Orders;
 import com.Certant.servicio.del.automotor.repositories.OrderRepository;
 import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +50,13 @@ public class OrderServiceImplementation implements OrderService {
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public void saveOrder(Orders order) {
         orderRepository.save(order);
     }
 
     @Override
-    public void updateOrder(Long id, Order order) {
-        Order order1 = orderRepository.findById(id).orElse(null);
+    public void updateOrder(Long id, Orders order) {
+        Orders order1 = orderRepository.findById(id).orElse(null);
         assert order1 != null;
         order1.setService(order.getService());
         order1.setHour(order.getHour());

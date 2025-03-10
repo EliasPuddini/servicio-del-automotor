@@ -1,7 +1,7 @@
 package com.Certant.servicio.del.automotor.controllers;
 
 import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
-import com.Certant.servicio.del.automotor.models.entities.Order;
+import com.Certant.servicio.del.automotor.models.entities.Orders;
 import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +39,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveOrder(@RequestBody Order order){
+    public ResponseEntity<String> saveOrder(@RequestBody Orders order){
         try{
             orderService.saveOrder(order);
             return ResponseEntity.status(HttpStatus.OK).body("Order saved successfully");
@@ -59,7 +59,7 @@ public class OrderController {
     }
 
     @PutMapping("/{userID}")
-    public ResponseEntity<?> updateUser(@PathVariable("userID") Long orderID, @RequestBody @Validated Order order) {
+    public ResponseEntity<?> updateUser(@PathVariable("userID") Long orderID, @RequestBody @Validated Orders order) {
         try {
             orderService.updateOrder(orderID,order);
             return ResponseEntity.status(HttpStatus.OK).body("Order with ID: "+ orderID+" updated successfully");

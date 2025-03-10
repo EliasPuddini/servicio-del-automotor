@@ -2,19 +2,14 @@ package com.Certant.servicio.del.automotor.models.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "documentType")
+public class DocumentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String userName;
-    private String password;
-    private Boolean isAdmin = false;
-    private Boolean isMechanic = false;
+    public String name;
 }

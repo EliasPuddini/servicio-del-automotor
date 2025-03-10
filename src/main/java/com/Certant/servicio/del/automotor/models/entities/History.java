@@ -7,14 +7,14 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "History")
+@Table(name = "history")
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date date;
     @ManyToOne
-    private Order order;
+    private Orders order;
     @ManyToOne
     private Mechanic mechanic;
     @ManyToOne

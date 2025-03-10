@@ -12,16 +12,16 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Mechanics")
+@Table(name = "mechanic")
 public class Mechanic{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToOne
-    @JoinColumn(name = "document_id", unique = true)
+    @JoinColumn(unique = true)
     private Document document;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany()

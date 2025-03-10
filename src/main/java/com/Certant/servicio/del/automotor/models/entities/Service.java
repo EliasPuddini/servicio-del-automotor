@@ -3,9 +3,9 @@ package com.Certant.servicio.del.automotor.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
-@Table(name = "Services")
+@Table(name = "service")
+@Data
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

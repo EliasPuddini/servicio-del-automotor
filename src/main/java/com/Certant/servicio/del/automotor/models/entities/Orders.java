@@ -9,8 +9,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "`order`")
-public class Order {
+@Table(name = "orders")
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +23,6 @@ public class Order {
     @ManyToOne
     private Service service;
     private Double finalPrice;
-    @ManyToMany
+    @OneToMany
     private List<Bonus> bonus;
 }

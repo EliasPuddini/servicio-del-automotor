@@ -1,6 +1,6 @@
 package com.Certant.servicio.del.automotor.models.dto;
 
-import com.Certant.servicio.del.automotor.models.entities.Order;
+import com.Certant.servicio.del.automotor.models.entities.Orders;
 import lombok.Getter;
 
 import java.sql.Time;
@@ -18,7 +18,7 @@ public class OrderDTO {
     private double finalPrice;
     private List<BonusDTO> bonus = new ArrayList<>();
 
-    public OrderDTO(Order order){
+    public OrderDTO(Orders order){
         this.date = order.getDate();
         this.hour = order.getHour();
         this.vehicle = new VehicleDTO(order.getVehicle());

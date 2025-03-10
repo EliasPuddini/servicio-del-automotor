@@ -1,19 +1,17 @@
 package com.Certant.servicio.del.automotor.models.entities;
 
-import com.Certant.servicio.del.automotor.models.enums.DocumentType;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Setter;
 
 @Data
 @Entity
-@Table(name = "Documents")
+@Table(name = "document")
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "documentType")
+    @ManyToOne
+    @JoinColumn(name = "documentType_id")
     private DocumentType documentType;
     private String value;
 
