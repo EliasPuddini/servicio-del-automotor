@@ -3,10 +3,8 @@ package com.Certant.servicio.del.automotor.service.implementations;
 import com.Certant.servicio.del.automotor.models.dto.ClientDTO;
 import com.Certant.servicio.del.automotor.models.entities.Client;
 import com.Certant.servicio.del.automotor.models.entities.ClientType;
-import com.Certant.servicio.del.automotor.repositories.ClientRepository;
-import com.Certant.servicio.del.automotor.repositories.ClientTypeRepository;
-import com.Certant.servicio.del.automotor.repositories.DocumentRepository;
-import com.Certant.servicio.del.automotor.repositories.UserRepository;
+import com.Certant.servicio.del.automotor.models.entities.DocumentType;
+import com.Certant.servicio.del.automotor.repositories.*;
 import com.Certant.servicio.del.automotor.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +25,8 @@ public class ClientServiceImplementation implements ClientService {
     private UserRepository userRepository;
     @Autowired
     private ClientTypeRepository clientTypeRepository;
+    @Autowired
+    private DocumentTypeRepository documentTypeRepository;
 
     @Override
     public List<ClientDTO> getAll() {
@@ -51,6 +51,8 @@ public class ClientServiceImplementation implements ClientService {
     @Override
     public void save(Client client) {
         try{
+            DocumentType documentType = documentTypeRepository.findAll().stream().filter(documentType1 -> documentType1.name.equals(client.getDocument().getDocumentType().getName())).findFirst().orElse(null);
+            if(documentType != null) client.getDocument().setDocumentType(documentType);
             documentRepository.save(client.getDocument());
             userRepository.save(client.getUser());
             ClientType clientType = clientTypeRepository.findAll().stream().filter(Type -> Objects.equals(Type.getName(), "Basico")).findFirst().orElse(null);

@@ -3,6 +3,7 @@ const app = Vue.createApp({
       return {
           turnos: [],
           clientes: [],
+          vehiculosFiltrados:[],
           servicios: [],
           mostrarModal: false,
           order:{
@@ -68,13 +69,16 @@ const app = Vue.createApp({
             console.error("Error al cargar vehículos:", error);
         }
     },
-      postearOrden(){
-        axios.post('/api/order', this.nuevoCliente)
-              .then(response => {
-                  this.clientes.push(response.data);
-              })
-              .catch(error => console.error(error));
-      }
+    postearOrden(){
+      axios.post('/api/order', this.nuevoCliente)
+            .then(response => {
+                this.clientes.push(response.data);
+            })
+            .catch(error => console.error(error));
+    },
+    filtrarVehiculos(){
+
+    }
   }
 });
 app.mount('#app');

@@ -61,6 +61,11 @@
 
     <!-- Vue App -->
     <div id="app" class="container mt-4">
+        <!-- Mensaje de respuesta con Bootstrap -->
+        <div v-if="mensaje" class="alert" :class="alertClass" role="alert">
+            {{ mensaje }}
+        </div>
+
         
         <h2 class="text-center">Lista de Clientes</h2>
         <!-- Tabla de Clientes -->
@@ -72,13 +77,13 @@
                         <th>Tipo de Documento</th>
                         <th>Documento</th>
                         <th>Tipo Usuario</th>
-                    </tr> 
+                    </tr>
                 </thead>
                 <tbody class="table-primary text-dark">
                     <div v-if="clientes.length > 0">
                         <tr v-for="cliente in clientes" :key="cliente.id">
                             <td>{{cliente.name}}</td>
-                            <td>{{cliente.document.documentType}}</td>
+                            <td>{{cliente.document.documentType.name}}</td>
                             <td>{{cliente.document.value}} </td>
                             <td>{{cliente.clientType.name}}</td>
                         </tr>
@@ -111,7 +116,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tipo de Documento</label>
-                                <select v-model="nuevoCliente.document.documentType" class="form-control" required>
+                                <select v-model="nuevoCliente.document.documentType.name" class="form-control" required>
                                     <option value="DNI">DNI</option>
                                     <option value="CUIT">CUIT</option>
                                     <option value="CUIL">CUIL</option>
