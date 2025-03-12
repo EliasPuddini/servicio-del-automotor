@@ -5,12 +5,14 @@ import lombok.Getter;
 
 @Getter
 public class BonusDTO {
+    private Long id;
     private double bonus;
     private ServiceDTO service;
     private double percentage;
     private Boolean isActive;
 
     public BonusDTO(Bonus bonus){
+        this.id = bonus.getId();
         this.bonus = bonus.getBonus();
         this.percentage = bonus.getPercentaje();
         this.isActive = bonus.isActive();

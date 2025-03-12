@@ -10,6 +10,7 @@ import java.util.List;
 
 @Getter
 public class OrderDTO {
+    private Long id;
     private Date date;
     private Time hour;
     private VehicleDTO vehicle;
@@ -19,6 +20,7 @@ public class OrderDTO {
     private List<BonusDTO> bonus = new ArrayList<>();
 
     public OrderDTO(Orders order){
+        this.id = order.getId();
         this.date = order.getDate();
         this.hour = order.getHour();
         this.vehicle = new VehicleDTO(order.getVehicle());

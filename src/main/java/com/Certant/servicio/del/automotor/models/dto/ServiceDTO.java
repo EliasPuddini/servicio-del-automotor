@@ -5,9 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class ServiceDTO {
+    private Long id;
     private String name;
 
     public ServiceDTO(Service service){
+        this.id = service.getId();
         this.name = service.getName();
     }
 }

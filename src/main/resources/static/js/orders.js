@@ -70,15 +70,36 @@ const app = Vue.createApp({
         }
     },
     postearOrden(){
-      axios.post('/api/order', this.nuevoCliente)
+
+      const clientePosteado = this.clientes.find(c => c.id === this.order.client.id);
+      this.order.client = clientePosteado;
+      const vehiculoPosteado = this.order.client.vehicles.find(c => c.carPatent === this.order.vehicle.carPatent);
+      this.order.vehicle = vehiculoPosteado;
+      const servicioPosteado = this.servicios.find(s => s.name === this.order.service.name);
+      this.order.service = servicioPosteado;
+
+      // Formatear la hora a "HH:mm:ss"
+      if (this.order.hour) {
+        this.order.hour = this.order.hour.length === 5 ? `${this.order.hour}:00` : this.order.hour;
+      }
+
+
+      axios.post('/api/order', this.order)
             .then(response => {
-                this.clientes.push(response.data);
+                
             })
             .catch(error => console.error(error));
     },
-    filtrarVehiculos(){
-
-    }
+    filtrarVehiculos() {
+      const clienteSeleccionado = this.clientes.find(c => c.id === this.order.client.id);
+      
+      if (clienteSeleccionado && clienteSeleccionado.vehicles.length > 0) {
+          this.vehiculosFiltrados = clienteSeleccionado.vehicles;
+      } else {
+          this.vehiculosFiltrados = [];
+          alert("El cliente seleccionado no tiene vehículos registrados.");
+      }
+  },
   }
 });
 app.mount('#app');

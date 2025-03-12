@@ -2,7 +2,9 @@ package com.Certant.servicio.del.automotor.service.implementations;
 
 import com.Certant.servicio.del.automotor.models.dto.OrderDTO;
 import com.Certant.servicio.del.automotor.models.entities.Orders;
+import com.Certant.servicio.del.automotor.repositories.ClientRepository;
 import com.Certant.servicio.del.automotor.repositories.OrderRepository;
+import com.Certant.servicio.del.automotor.repositories.VehicleRepository;
 import com.Certant.servicio.del.automotor.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,10 @@ public class OrderServiceImplementation implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Override
     public List<OrderDTO> getOrders() {
@@ -51,6 +57,7 @@ public class OrderServiceImplementation implements OrderService {
 
     @Override
     public void saveOrder(Orders order) {
+
         orderRepository.save(order);
     }
 

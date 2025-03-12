@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Getter
 public class HistoryDTO {
+    private Long id;
     private Date date;
     private OrderDTO order;
     private MechanicDTO mechanic;
@@ -14,6 +15,7 @@ public class HistoryDTO {
     private String observation;
 
     public HistoryDTO(History history){
+        this.id = history.getId();
         this.date = history.getDate();
         this.order = new OrderDTO(history.getOrder());
         this.mechanic = new MechanicDTO(history.getMechanic());

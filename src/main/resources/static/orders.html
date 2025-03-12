@@ -76,7 +76,7 @@
                 <tbody>
                     <tr v-for="turno in turnos" :key="turno.id">
                         <td>{{ turno.client.name }}</td>
-                        <td>{{ turno.client.document.documentType }}</td>
+                        <td>{{ turno.client.document.documentType.name }}</td>
                         <td>{{ turno.client.document.value }}</td>
                         <td>{{ turno.vehicle.carPatent }}</td>
                         <td>{{ formatFecha(turno.date) }}</td>
@@ -109,9 +109,12 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Vehículo</label>
-                                <select class="form-control" v-model="order.vehicle.carPatent">
-                                    <option v-for="vehiculo in vehiculosFiltrados" :key="vehiculo.carPatent" :value="vehiculo.carPatent">{{ vehiculo.carPatent }}</option>
+                                <select class="form-control" v-model="order.vehicle.carPatent" v-if="vehiculosFiltrados.length">
+                                    <option v-for="vehiculo in vehiculosFiltrados" :key="vehiculo.carPatent" :value="vehiculo.carPatent">
+                                        {{ vehiculo.carPatent }}
+                                    </option>
                                 </select>
+                                <p v-else class="text-warning">Este cliente no tiene vehículos registrados.</p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Servicio</label>
@@ -126,6 +129,10 @@
                             <div class="mb-3">
                                 <label class="form-label">Hora</label>
                                 <input type="time" class="form-control" v-model="order.hour">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">precio</label>
+                                <input type="text" class="form-control" v-model="order.finalPrice">
                             </div>
                         </form>
                     </div>

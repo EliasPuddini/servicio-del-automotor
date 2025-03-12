@@ -5,12 +5,14 @@ import lombok.Getter;
 
 @Getter
 public class UserDTO {
+    private Long id;
     private String name;
     private String password;
     private Boolean isAdmin;
     private Boolean isMechanic;
 
     public UserDTO(User user){
+        this.id = user.getId();
         this.name = user.getUserName();
         this.password = user.getPassword();
         this.isAdmin = user.getIsAdmin();

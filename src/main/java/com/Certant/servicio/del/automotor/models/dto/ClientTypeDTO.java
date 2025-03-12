@@ -5,9 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class ClientTypeDTO {
+    private Long id;
     private String name;
 
     public ClientTypeDTO(ClientType clientType){
+        this.id = clientType.getId();
         this.name = clientType.getName();
     }
 }

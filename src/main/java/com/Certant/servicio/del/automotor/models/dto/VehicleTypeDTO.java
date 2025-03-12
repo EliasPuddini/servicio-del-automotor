@@ -5,9 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class VehicleTypeDTO {
+    private Long id;
     private String name;
 
     public VehicleTypeDTO(VehicleType vehicleType){
+        this.id = vehicleType.getId();
         this.name = vehicleType.getName();
     }
 }

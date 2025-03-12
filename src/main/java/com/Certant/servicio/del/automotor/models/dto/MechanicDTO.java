@@ -6,16 +6,19 @@ import com.Certant.servicio.del.automotor.models.dto.UserDTO;
 import com.Certant.servicio.del.automotor.models.entities.Mechanic;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class MechanicDTO{
+    private Long id;
     private String name;
     private DocumentDTO documentDTO;
-    private List<ContactDTO> contacts;
+    private List<ContactDTO> contacts = new ArrayList<>();
     private String availability;
 
     public MechanicDTO(Mechanic mechanic){
+        this.id = mechanic.getId();
         this.availability = mechanic.getAvailability();
         this.name = mechanic.getName();
         this.documentDTO = new DocumentDTO(mechanic.getDocument());
