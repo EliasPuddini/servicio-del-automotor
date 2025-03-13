@@ -22,7 +22,9 @@ const app = Vue.createApp({
                     name:""
                 }
             },
-            vehicleTypes:[]
+            vehicleTypes:[],
+            contactModal: false,
+            vehicleModal: true
         }
     },
     created() {
@@ -53,20 +55,33 @@ const app = Vue.createApp({
                 })
         },
         postContact(){
-            if(!contactos.some(c => c.email === nuevoContacto.email && c.phone === nuevoContacto.phone)){
-                this.client.contacts.add(this.nuevoContacto);
-                axios.patch(`api/clients`,this.client);
+            if(!this.contacts.some(c => c.email === this.nuevoContacto.email && c.phone === this.nuevoContacto.phone)){
+                this.client.contacts.push(this.nuevoContacto);
+                axios.patch(`api/clients`,this.client)
+                    .then(response =>{
+                        
+                    }). catch(error =>{
+                        console.log(error);
+                    })
             }else{
                 alert(" Dicho contacto ya existe en el cliente. ");
+                this.client.contacts.pop();
             }
         },
         postVehicle(){
-            if(!contactos.some(c => c.email === nuevoContacto.email && c.phone === nuevoContacto.phone)){
-                this.client.vehicles.add(this.nuevoVehiculo);
+            if(!this.vehicles.some(v => v.carPatent === nuevoVehiculo.carPatent)){
+                this.client.vehicles.push(this.nuevoVehiculo);
                 axios.patch(`api/clients`,this.client);
             }else{
                 alert(" Dicho vehiculo ya existe en el cliente. ");
+                this.clients.contacts.pop();
             }
+        },
+        openContact(){
+            this.contactModal = true;
+        },
+        closeContact(){
+            this.contactModal = false;
         }
     }
 });

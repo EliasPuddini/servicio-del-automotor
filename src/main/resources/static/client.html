@@ -69,13 +69,11 @@
         
         <div v-if="client" class="card p-3">
             <h3>
-                Documento: 
+                Documento: {{ client.document.documentType.name }} - {{ client.document.value }}
             </h3>
-            <p>{{ client.document.documentType.name }} - {{ client.document.value }}</p>
             <h3>
-                Tipo de Cliente:
+                Tipo de Cliente: {{ client.clientType?.name }}
             </h3>
-            <p>{{ client.clientType?.name }}</p>
             
             <h3>Contactos</h3>
             
@@ -85,30 +83,30 @@
                         <tr>
                             <th>Email</th>
                             <th>Telefono</th>
-                            <th><button class="btn btn-success"><i class="bi bi-plus-circle"></i> Agregar</button></th>
+                            <th><button class="btn btn-success" @click="openContact"><i class="bi bi-plus-circle"></i> Agregar</button></th>
                         </tr>
                     </thead>
                     <tbody class="table-primary text-dark">
                         <tr v-if="contacts.length > 0" v-for="contact in contacts" :key="contact.id">
                             <td>{{contact.email}}</td>
                             <td>{{contact.phone}}</td>
-                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Editar</button></td>
+                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
                             
                         </tr>
                         <tr v-else>
-                            <td colspan="5" class="text-center text-light">Cargando contactos...</td>
+                            <td colspan="5" class="text-center">Cargando contactos...</td>
                         </tr>
                     </tbody>
                     
                 </table>
             </div>
             <!-- Modal para agregar contacto -->
-            <div class="modal fade" id="addContactModal" tabindex="-1" aria-labelledby="addContactModalLabel" aria-hidden="true">
+            <div v-if="contactModal" class="modal fade show d-block" tabindex="-1">
                 <div class="modal-dialog">
-                    <div class="modal-content">
+                    <div class="modal-content bg-dark text-light">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addContactModalLabel">Agregar Contacto</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title">Agregar Contacto</h5>
+                            <button type="button" class="btn-close btn-close-white" @click="closeContact"></button>
                         </div>
                         <div class="modal-body">
                             <form @submit.prevent="postContact">
@@ -126,7 +124,6 @@
                     </div>
                 </div>
             </div>
-
             
             <h3>Vehículos</h3>
             
@@ -147,7 +144,7 @@
                             <td>{{vehicle.model.brand.name}}</td>
                             <td>{{vehicle.carPatent}}</td>
                             <td>{{vehicle.vehicleType.name}}</td>
-                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Editar</button></td>
+                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
                         </tr>
                         <tr v-else>
                             <td colspan="5" class="text-center">Cargando vehiculos...</td>

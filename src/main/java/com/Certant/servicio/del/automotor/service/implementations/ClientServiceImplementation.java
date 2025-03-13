@@ -1,9 +1,7 @@
 package com.Certant.servicio.del.automotor.service.implementations;
 
 import com.Certant.servicio.del.automotor.models.dto.ClientDTO;
-import com.Certant.servicio.del.automotor.models.entities.Client;
-import com.Certant.servicio.del.automotor.models.entities.ClientType;
-import com.Certant.servicio.del.automotor.models.entities.DocumentType;
+import com.Certant.servicio.del.automotor.models.entities.*;
 import com.Certant.servicio.del.automotor.repositories.*;
 import com.Certant.servicio.del.automotor.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,10 @@ public class ClientServiceImplementation implements ClientService {
     private ClientTypeRepository clientTypeRepository;
     @Autowired
     private DocumentTypeRepository documentTypeRepository;
+    @Autowired
+    private ContactRepository contactRepository;
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Override
     public List<ClientDTO> getAll() {
@@ -64,4 +66,41 @@ public class ClientServiceImplementation implements ClientService {
         }
 
     }
+
+    @Override
+    public void patch(Client client) {
+        Optional<Client> existingClientOpt = clientRepository.findById(client.getId());
+
+        if (existingClientOpt.isPresent()) {
+            Client existingClient = existingClientOpt.get();
+
+            if (client.getContacts() != null) {
+                List<Contact> updatedContacts = new ArrayList<>(existingClient.getContacts());
+                for (Contact contact : client.getContacts()) {
+                    if (contact.getId() == null) {
+                        contactRepository.save(contact);
+                        updatedContacts.add(contact);
+                    }
+                }
+                existingClient.setContacts(updatedContacts);
+            }
+
+            if (client.getVehicles() != null) {
+                List<Vehicle> updatedVehicles = new ArrayList<>(existingClient.getVehicles());
+                for (Vehicle vehicle : client.getVehicles()) {
+                    if (vehicle.getId() == null) {
+                        vehicleRepository.save(vehicle);
+                        updatedVehicles.add(vehicle);
+                    }
+                }
+                existingClient.setVehicles(updatedVehicles);
+            }
+
+            clientRepository.save(existingClient);
+        } else {
+            throw new IllegalArgumentException("Client with ID " + client.getId() + " not found");
+        }
+    }
+
+
 }

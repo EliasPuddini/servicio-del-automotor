@@ -56,5 +56,13 @@ public class ClientController {
         }
     }
 
-
+    @PatchMapping
+    public ResponseEntity<String> patchClient(@RequestBody Client client){
+        try{
+            clientService.patch(client);
+            return ResponseEntity.status(HttpStatus.OK).body(" Se ha parcheado el cliente. ");
+        } catch (Exception exception){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" No se ha podido parchear el cliente. ");
+        }
+    }
 }
