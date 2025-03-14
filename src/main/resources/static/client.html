@@ -90,7 +90,7 @@
                         <tr v-if="contacts.length > 0" v-for="contact in contacts" :key="contact.id">
                             <td>{{contact.email}}</td>
                             <td>{{contact.phone}}</td>
-                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
+                            <td><button class="btn btn-warning me-2" @Click="deleteContact(contact.id)"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
                             
                         </tr>
                         <tr v-else>
@@ -144,7 +144,7 @@
                             <td>{{vehicle.model.brand.name}}</td>
                             <td>{{vehicle.carPatent}}</td>
                             <td>{{vehicle.vehicleType.name}}</td>
-                            <td><button class="btn btn-warning me-2"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
+                            <td><button class="btn btn-warning me-2" @Click="deleteVehicle(vehicle.id)"><i class="bi bi-pencil-square"></i> Eliminar</button></td>
                         </tr>
                         <tr v-else>
                             <td colspan="5" class="text-center">Cargando vehiculos...</td>

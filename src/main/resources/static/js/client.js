@@ -82,6 +82,22 @@ const app = Vue.createApp({
         },
         closeContact(){
             this.contactModal = false;
+        },
+        deleteContact(contactId){
+            axios.delete(`api/contacts/${contactId}`)
+                .then(response =>{
+                    console.log(response);
+                }).catch(error =>{
+                    console.log(error);
+                });
+        },
+        deleteVehicle(vehicleId){
+            axios.delete(`api/vehicle/${vehicleId}`)
+                .then(response =>{
+                    console.log(response);
+                }).catch(error =>{
+                    console.log(error);
+                });
         }
     }
 });
