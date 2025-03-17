@@ -23,8 +23,12 @@ const app = Vue.createApp({
                 }
             },
             vehicleTypes:[],
+            brands:[],
+            nuevaMarca: null,
+            nuevoModelo: null,
+            models:[],
             contactModal: false,
-            vehicleModal: true
+            vehicleModal: false
         }
     },
     created() {
@@ -45,14 +49,22 @@ const app = Vue.createApp({
                 .catch(error => {
                     console.error(error);
                 });
-            axios.get("api/vehicleTypes")
+            axios.get("api/vehicleThings/vehicleTypes")
                 .then(response => {
                     this.vehicleTypes = response.data;
                     console.log(this.vehicleTypes);
                 })
                 .catch(error =>{
                     console.log(error);
+                });
+            axios.get("api/vehicleThings/brands")
+                .then(response => {
+                    this.brands = response.data;
+                    console.log(this.brands);
                 })
+                .catch(error =>{
+                    console.log(error);
+                });
         },
         postContact(){
             if(!this.contacts.some(c => c.email === this.nuevoContacto.email && c.phone === this.nuevoContacto.phone)){
@@ -91,11 +103,29 @@ const app = Vue.createApp({
                     console.log(error);
                 });
         },
+        openVehicle(){
+            this.vehicleModal = true;
+        },
+        closeVehicle(){
+            this.vehicleModel = false;
+        },
         deleteVehicle(vehicleId){
             axios.delete(`api/vehicle/${vehicleId}`)
                 .then(response =>{
                     console.log(response);
                 }).catch(error =>{
+                    console.log(error);
+                });
+        },
+        searchModels(id){
+            console.log(id);
+            this.models = null;
+            axios.get(`api/vehicleThings/brands/${id}/models`)
+                .then(response => {
+                    this.models = response.data;
+                    console.log(this.models);
+                })
+                .catch(error =>{
                     console.log(error);
                 });
         }

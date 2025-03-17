@@ -135,7 +135,7 @@
                             <th>Marca</th>
                             <th>Kilometros</th>
                             <th>Tipo Vehiculo</th>
-                            <th><button class="btn btn-success"><i class="bi bi-plus-circle"></i> Agregar</button></th>
+                            <th><button class="btn btn-success" @click="openVehicle"><i class="bi bi-plus-circle"></i> Agregar</button></th>
                         </tr>
                     </thead>
                     <tbody class="table-primary text-dark">
@@ -154,22 +154,26 @@
                 </table>
             </div>
             <!-- Modal para agregar vehículo -->
-            <div class="modal fade" id="addVehicleModal" tabindex="-1" aria-labelledby="addVehicleModalLabel" aria-hidden="true">
+            <div v-if="vehicleModal" class="modal fade show d-block" tabindex="-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="addVehicleModalLabel">Agregar Vehículo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h5 class="modal-title">Agregar Vehículo</h5>
+                            <button @click="closeVehicle" type="button" class="btn-close"></button>
                         </div>
                         <div class="modal-body">
                             <form @submit.prevent="postVehicle">
                                 <div class="mb-3">
-                                    <label for="vehicleModel" class="form-label">Modelo</label>
-                                    <input type="text" class="form-control" id="vehicleModel" v-model="nuevoVehiculo.model.name" required>
+                                    <label for="vehicleBrand" class="form-label">Marca</label>
+                                    <select class="form-control" v-model="nuevoVehiculo.model.brand" @change="searchModels(nuevoVehiculo.model.brand.id)">
+                                        <option v-for="brand in brands" :key="brand.id" :value="brand">{{ brand.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="vehicleBrand" class="form-label">Marca</label>
-                                    <input type="text" class="form-control" id="vehicleBrand" v-model="nuevoVehiculo.model.brand.name" required>
+                                    <label for="vehicleModel" class="form-label">Modelo</label>
+                                    <select class="form-control" v-model="nuevoVehiculo.model">
+                                        <option v-for="model in models" :key="model.id" :value="model">{{ model.name }}</option>
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="vehiclePatent" class="form-label">Patente</label>
