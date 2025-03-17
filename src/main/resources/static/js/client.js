@@ -81,7 +81,10 @@ const app = Vue.createApp({
             }
         },
         postVehicle(){
-            if(!this.vehicles.some(v => v.carPatent === nuevoVehiculo.carPatent)){
+
+            console.log(this.nuevoVehiculo)
+
+            if(!this.vehicles.some(v => v.carPatent === this.nuevoVehiculo.carPatent)){
                 this.client.vehicles.push(this.nuevoVehiculo);
                 axios.patch(`api/clients`,this.client);
             }else{
@@ -107,7 +110,7 @@ const app = Vue.createApp({
             this.vehicleModal = true;
         },
         closeVehicle(){
-            this.vehicleModel = false;
+            this.vehicleModal = false;
         },
         deleteVehicle(vehicleId){
             axios.delete(`api/vehicle/${vehicleId}`)
