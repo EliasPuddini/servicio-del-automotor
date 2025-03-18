@@ -56,7 +56,7 @@ public class ModelServiceImplementation implements ModelService {
     @Override
     public void saveModel(Model model) {
 
-        if(model.getBrand().getId() == 0){
+        if(model.getBrand().getId() == null){
             brandRepository.save(model.getBrand());
         }else{
             Brand brand = brandRepository.findAll().stream().filter(brand1 -> Objects.equals(brand1.getName(), model.getBrand().getName())).findFirst().orElse(null);

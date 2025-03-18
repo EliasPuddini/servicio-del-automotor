@@ -12,6 +12,11 @@
             background-color: #121212;
             color: #ffffff;
         }
+        .table-responsive {
+            max-height: 400px; /* Ajusta la altura según necesites */
+            overflow-y: auto;
+            border: 1px solid #444; /* Opcional: Para destacar el área de la tabla */
+        }
         .table-dark {
             background-color: #1e1e1e;
         }
@@ -66,7 +71,7 @@
         <h2 class="text-center">Lista de Marcas y modelos</h2>
         <!-- Tabla de Clientes -->
         <div class="table-responsive">
-            <table class="table table-dark table-striped">
+            <table class="table table-dark table-hover text-center">
                 <thead>
                     <tr>
                         <th>Marca</th>
@@ -110,7 +115,7 @@
                                     <option v-for="brand in brands" :key="brand.id" :value="brand">{{ brand.name }}</option>
                                 </select>
                             
-                                <input v-else type="text" v-model="nuevaMarca" class="form-control" placeholder="Ingrese nueva marca" required>
+                                <input v-else @Change="newBrandCheck" type="text" v-model="nuevoModelo.brand.name" class="form-control" placeholder="Ingrese nueva marca" required>
                             </div>
                             <div class="mb-3">
                                 <label for="vehicleModel" class="form-label">Modelo</label>
