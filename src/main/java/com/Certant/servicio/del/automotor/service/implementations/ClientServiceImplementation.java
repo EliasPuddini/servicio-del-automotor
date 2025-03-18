@@ -29,6 +29,8 @@ public class ClientServiceImplementation implements ClientService {
     private ContactRepository contactRepository;
     @Autowired
     private VehicleRepository vehicleRepository;
+    @Autowired
+    private VehicleTypeRepository vehicleTypeRepository;
 
     @Override
     public List<ClientDTO> getAll() {
@@ -87,8 +89,16 @@ public class ClientServiceImplementation implements ClientService {
 
             if (client.getVehicles() != null) {
                 List<Vehicle> updatedVehicles = new ArrayList<>(existingClient.getVehicles());
+                List<VehicleType> vehicleTypes = vehicleTypeRepository.findAll().stream().toList();
+
                 for (Vehicle vehicle : client.getVehicles()) {
                     if (vehicle.getId() == null) {
+
+                        vehicleTypes.forEach(vehicleType -> {
+                            if(Objects.equals(vehicleType.getName(), vehicle.getVehicleType().getName())){
+                                vehicle.setVehicleType(vehicleType);
+                            }
+                        });
                         vehicleRepository.save(vehicle);
                         updatedVehicles.add(vehicle);
                     }

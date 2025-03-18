@@ -66,30 +66,28 @@ const app = Vue.createApp({
                     console.log(error);
                 });
         },
+        mostrarMensaje(mensaje, tipo) {
+            this.mensaje = mensaje;
+            this.alertClass = tipo === 'success' ? 'alert-success' : 'alert-danger';
+            setTimeout(() => {
+                this.mensaje = null;
+            }, 3000); // Ocultar mensaje después de 3 segundos
+        },
         postContact(){
             if(!this.contacts.some(c => c.email === this.nuevoContacto.email && c.phone === this.nuevoContacto.phone)){
                 this.client.contacts.push(this.nuevoContacto);
                 axios.patch(`api/clients`,this.client)
                     .then(response =>{
-                        
+                        this.mostrarMensaje("Contacto agregado correctamente", "success");
+                        this.closeContact();
+                        this.contacts.push(this.nuevoContacto);
                     }). catch(error =>{
                         console.log(error);
+                        this.mostrarMensaje("Error al agregar el contacto", "error");
                     })
             }else{
                 alert(" Dicho contacto ya existe en el cliente. ");
                 this.client.contacts.pop();
-            }
-        },
-        postVehicle(){
-
-            console.log(this.nuevoVehiculo)
-
-            if(!this.vehicles.some(v => v.carPatent === this.nuevoVehiculo.carPatent)){
-                this.client.vehicles.push(this.nuevoVehiculo);
-                axios.patch(`api/clients`,this.client);
-            }else{
-                alert(" Dicho vehiculo ya existe en el cliente. ");
-                this.clients.contacts.pop();
             }
         },
         openContact(){
@@ -102,9 +100,32 @@ const app = Vue.createApp({
             axios.delete(`api/contacts/${contactId}`)
                 .then(response =>{
                     console.log(response);
+                    this.contacts = this.contacts.filter(contact => contact.id !== contactId);
+                    this.mostrarMensaje("Contacto eliminado correctamente", "success");
                 }).catch(error =>{
                     console.log(error);
+                    this.mostrarMensaje("Error al eliminar el contacto", "error");
                 });
+        },
+        postVehicle(){
+
+            console.log(this.nuevoVehiculo)
+
+            if(!this.vehicles.some(v => v.carPatent === this.nuevoVehiculo.carPatent)){
+                this.client.vehicles.push(this.nuevoVehiculo);
+                axios.patch(`api/clients`,this.client)
+                    .then(response=>{
+                        this.mostrarMensaje("Vehículo agregado correctamente", "success");
+                        this.closeVehicle();
+                    }). catch(error =>{
+                        console.log(error);
+                        this.clients.vehicles.pop();
+                        this.mostrarMensaje("Error al agregar el vehículo", "error");
+                    });
+            }else{
+                alert(" Dicho vehiculo ya existe en el cliente. ");
+                
+            }
         },
         openVehicle(){
             this.vehicleModal = true;
@@ -113,11 +134,14 @@ const app = Vue.createApp({
             this.vehicleModal = false;
         },
         deleteVehicle(vehicleId){
-            axios.delete(`api/vehicle/${vehicleId}`)
+            axios.delete(`api/vehicles/${vehicleId}`)
                 .then(response =>{
                     console.log(response);
+                    this.vehicles = this.vehicles.filter(vehicle => vehicle.id !== vehicleId);
+                    this.mostrarMensaje("Vehículo eliminado correctamente", "success");
                 }).catch(error =>{
                     console.log(error);
+                    this.mostrarMensaje("Error al eliminar el vehículo", "error");
                 });
         },
         searchModels(id){

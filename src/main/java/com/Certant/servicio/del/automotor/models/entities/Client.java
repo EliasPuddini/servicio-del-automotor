@@ -32,4 +32,8 @@ public class Client{
     @ManyToOne
     @JoinColumn(name = "clientType_id")
     private ClientType clientType;
+
+    public void removeVehicle(Vehicle vehicle){
+        this.vehicles.remove(vehicle);
+    }
 }

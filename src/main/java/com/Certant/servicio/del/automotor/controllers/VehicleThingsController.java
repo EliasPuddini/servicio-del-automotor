@@ -131,8 +131,8 @@ public class VehicleThingsController {
         }
     }
 
-    @DeleteMapping("/models")
-    public ResponseEntity<String> deleteModel(@RequestBody Long id){
+    @DeleteMapping("/models/{modelId}")
+    public ResponseEntity<String> deleteModel(@PathVariable("modelId") Long id){
         try {
             modelService.deleteModel(id);
             return ResponseEntity.status(HttpStatus.OK).body(" Se ha eliminado el modelo. ");
